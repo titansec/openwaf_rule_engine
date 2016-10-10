@@ -13,7 +13,7 @@ Table of Contents
 * [Community](#community)
 * [Bugs and Patches](#bugs-and-patches)
 * [Changes](#changes)
-* [Modules Configuration Directives](#modules configuration directives)
+* [Modules Configuration Directives](#modules-configuration-directives)
 * [Directives](#directives)
 * [Variables](#variables)
 * [Transformation Functions](#transformation-functions)
