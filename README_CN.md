@@ -67,8 +67,8 @@ Modules Configuration Directives
         "body_filter_state": true,                                  -- 响应体检测开关
         "reqbody_limit":134217728,                                  -- 请求体检测阈值，大于阈值不检测
         "respbody_limit":524288,                                    -- 响应体检测阈值，大于阈值不检测
-        "pre_path": "/secone/webapng/lualib/twaf/",                 -- 规则文件前置路径，与"path"组成完整的路径
-        "path": "lib/twaf/inc/twrules/all_rules-modsecurity",       -- 规则文件路径，与"pre_path"组成完整的路径
+        "pre_path": "/opt/OpenWAF/",                                -- OpenWAF安装路径
+        "path": "lib/twaf/inc/knowledge_db/twrules",                -- 特征规则库在OpenWAF中的路径
         "msg": [                                                    -- 日志格式
             "category",
             "severity",
@@ -137,19 +137,64 @@ Modules Configuration Directives
 
 PS：reqbody_limit值要小于nginx中client_body_buffer_size的值才会生效
 
-###state
-**syntax:** *state true|false*
+###respbody_limit
+**syntax:** *respbody_limit number*
 
-**default:** *true*
+**default:** *134217728*
+
+**context:** *twaf_secrules*
+
+响应体检测大小上限，默认134217728B(128MB)，若响应体大小超过设置上限，则不检测
+
+###pre_path
+**syntax:** *pre_path string*
+
+**default:** */opt/OpenWAF/*
 
 **context:** *twaf_secrules*
 
-###state
-**syntax:** *state true|false*
+OpenWAF的安装路径
 
-**default:** *true*
+###path
+**syntax:** *path string*
+
+**default:** *lib/twaf/inc/knowledge_db/twrules*
 
 **context:** *twaf_secrules*
+
+特征规则库在OpenWAF中的路径
+
+###msg
+**syntax:** *msg table*
+
+**default:** *[
+            "category",
+            "severity",
+            "action",
+            "meta",
+            "version",
+            "id",
+            "charactor_name",
+            {
+                "transaction_time": "%{DURATION}",
+                "logdata": "%{MATCHED_VAR}"
+            }
+        ]*
+
+**context:** *twaf_secrules*
+
+日志格式
+
+###state
+**syntax:** *rules_id table*
+
+**default:** *none*
+
+**context:** *twaf_secrules*
+
+用于排除特征
+
+[Back to TOC](#table-of-contents)
 
 Directives
 ==========
