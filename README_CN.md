@@ -10,10 +10,10 @@ Table of Contents
 * [Version](#version)
 * [Synopsis](#synopsis)
 * [Description](#description)
-* [Installation](#installation)
 * [Community](#community)
 * [Bugs and Patches](#bugs-and-patches)
 * [Changes](#changes)
+* [Modules Configuration Directives](#modules configuration directives)
 * [Directives](#directives)
 * [Variables](#variables)
 * [Transformation Functions](#transformation-functions)
@@ -38,11 +38,6 @@ Description
 
 [Back to TOC](#table-of-contents)
 
-Installation
-============
-
-[Back to TOC](#table-of-contents)
-
 Community
 =========
 
@@ -59,10 +54,41 @@ Please submit bug reports, wishlists, or patches by
 Changes
 =======
 
-
-
 [Back to TOC](#table-of-contents)
 
+
+Modules Configuration Directives
+================================
+```json
+    "twaf_secrules":{
+        "state": true,                                              -- 总开关
+        "reqbody_state": true,                                      -- 请求体检测开关
+        "header_filter_state": true,                                -- 响应头检测开关
+        "body_filter_state": true,                                  -- 响应体检测开关
+        "reqbody_limit":134217728,                                  -- 请求体检测阈值，大于阈值不检测
+        "respbody_limit":524288,                                    -- 响应体检测阈值，大于阈值不检测
+        "pre_path": "/secone/webapng/lualib/twaf/",                 -- 规则文件前置路径，与"path"组成完整的路径
+        "path": "lib/twaf/inc/twrules/all_rules-modsecurity",       -- 规则文件路径，与"pre_path"组成完整的路径
+        "msg": [                                                    -- 日志格式
+            "category",
+            "severity",
+            "action",
+            "meta",
+            "version",
+            "id",
+            "charactor_name",
+            {                                                       -- 字典中为变量
+                "transaction_time": "%{DURATION}",
+                "logdata": "%{MATCHED_VAR}"
+            }
+        ],
+        "rules_id":{                                                -- 特征排除
+            "111112": [{"REMOTE_HOST":"a.com", "URI":"^/ab"}]       -- 匹配中数组中信息则对应规则失效，数组中key为变量名称，值支持正则
+            "111113": {}                                            -- 特征未被排除
+            "111114": [{}]                                          -- 特征被无条件排除
+        }
+    }
+```
 
 Directives
 ==========
