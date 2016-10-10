@@ -59,7 +59,7 @@ Changes
 
 Modules Configuration Directives
 ================================
-```json
+```txt
     "twaf_secrules":{
         "state": true,                                              -- 总开关
         "reqbody_state": true,                                      -- 请求体检测开关
@@ -89,6 +89,67 @@ Modules Configuration Directives
         }
     }
 ```
+
+###state
+**syntax:** *state true|false*
+
+**default:** *true*
+
+**context:** *twaf_secrules*
+
+规则引擎总开关
+
+###reqbody_state
+**syntax:** *reqbody_state true|false*
+
+**default:** *true*
+
+**context:** *twaf_secrules*
+
+请求体检测开关
+
+###header_filter_state
+**syntax:** *header_filter_state true|false*
+
+**default:** *true*
+
+**context:** *twaf_secrules*
+
+响应头检测开关
+
+###body_filter_state
+**syntax:** *body_filter_state true|false*
+
+**default:** *false*
+
+**context:** *twaf_secrules*
+
+响应体检测开关，默认关闭，若开启需添加第三方模块[ngx_http_twaf_header_sent_filter_module暂未开源]
+
+###reqbody_limit
+**syntax:** *reqbody_limit number*
+
+**default:** *134217728*
+
+**context:** *twaf_secrules*
+
+请求体检测大小上限，默认134217728B(128MB)，若请求体超过设置上限，则不检测
+
+PS：reqbody_limit值要小于nginx中client_body_buffer_size的值才会生效
+
+###state
+**syntax:** *state true|false*
+
+**default:** *true*
+
+**context:** *twaf_secrules*
+
+###state
+**syntax:** *state true|false*
+
+**default:** *true*
+
+**context:** *twaf_secrules*
 
 Directives
 ==========
