@@ -185,7 +185,7 @@ OpenWAF的安装路径
 
 日志格式
 
-###state
+###rules_id
 **syntax:** *rules_id table*
 
 **default:** *none*
