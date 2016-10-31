@@ -283,7 +283,7 @@ OpenWAF的安装路径
         "desc": "某ip段内不许访问",
         "match": [{
             "vars": [{
-               "var": "REMOTE_ADDR",
+               "var": "REMOTE_ADDR"
             }],
             "operator": "ip_utils",
             "pattern": ["1.1.1.0/24","2.2.2.2-2.2.20.2"]
