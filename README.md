@@ -417,16 +417,33 @@ Variables
 * [ARGS_NAMES](#args_names)
 * [ARGS_POST ](#args_post)
 * [ARGS_POST_NAMES ](#args_post_names)
+* [BYTES_IN](#bytes_in)
+* [CONNECTION_REQUESTS](#connection_requests)
 * [DURATION](#duration)
-* [FILES ](#files)
+* [FILES](#files)
 * [FILES_NAMES](#files_names)
 * [GEO](#geo)
+* [GEO_CODE3](#geo_code3)
+* [GEO_CODE3](#geo_code)
+* [GEO_ID](#geo_id)
+* [GEO_CONTINENT](#geo_continent)
+* [GEO_NAME](#geo_name)
+* [GZIP_RATIO](#gzip_ratio)
+* [HTTP_COOKIE](#http_cookie)
 * [HTTP_HOST](#http_host)
+* [HTTP_REFERER](#http_referer)
+* [HTTP_USER_AGENT](#http_user_agent)
+* [IP_VERSION](#ip_version)
 * [MATCHED_VAR](#matched_var)
 * [MATCHED_VARS](#matched_vars)
 * [MATCHED_VAR_NAME](#matched_var_name)
 * [MATCHED_VARS_NAMES](#matched_var_names)
+* [ORIGINAL_DST_ADDR](#original_dst_addr)
+* [ORIGINAL_DST_PORT](#original_dst_port)
+* [POLICYID](#policyid)
 * [QUERY_STRING](#query_string)
+* [RAW_HEADER](#raw_header)
+* [RAW_HEADER_TRUE](#raw_header_true)
 * [REMOTE_ADDR](#remote_addr)
 * [REMOTE_HOST](#remote_host)
 * [REMOTE_PORT](#remote_port)
@@ -443,6 +460,7 @@ Variables
 * [REQUEST_PROTOCOL](#request_protocol)
 * [HTTP_VERSION](#http_version)
 * [URI](#uri)
+* [URL](#url)
 * [REQUEST_URI](#request_uri)
 * [RESPONSE_BODY](#response_body)
 * [RESPONSE_HEADERS](#response_headers)
@@ -462,6 +480,7 @@ Variables
 * [TIME_SEC](#time_sec)
 * [TIME_WDAY](#time_wday)
 * [TIME_YEAR](#time_year)
+* [TIME_LOCAL](#time_local)
 * [TX](#tx)
 * [UNIQUE_ID](#unique_id)
 
@@ -471,16 +490,14 @@ Variables
 
 ##ARGS
 
-table类型，所有的请求参数，包含ARGS_GET和ARGS_POST，但只检验value，不检验NAME
-
-PS: 此变量含义同modsecurity的ARGS变量
+table类型，所有的请求参数，包含ARGS_GET和ARGS_POST
 
 ```
 例如：POST http://www.baidu.com?name=miracle&age=5
 
 请求体为：time=123456&day=365
 
-ARGS变量值为["miracle", "5", "123456", "365"]
+ARGS变量值为{"name": "miracle", "age": "5", "time": "123456", "day": "365"}
 ```
 
 [Back to Var](#variables)
@@ -490,8 +507,6 @@ ARGS变量值为["miracle", "5", "123456", "365"]
 ##ARGS_COMBINED_SIZE
 
 number类型，请求参数总长度，只包含key和value的长度，不包含'&'或'='等符号
-
-PS: 此变量含义同modsecurity的ARGS_COMBINED_SIZE变量
 
 ```
 例如：GET http://www.baidu.com?name=miracle&age=5
@@ -507,12 +522,10 @@ ARGS_COMBINED_SIZE变量值为15，而不是18
 
 table类型，querystring参数
 
-PS: 此变量含义同modsecurity的ARGS_GET变量，同freewaf的URI_ARGS变量
-
 ```
 例如：GET http://www.baidu.com?name=miracle&age=5
 
-ARGS_GET变量值为["miracle", "5"]
+ARGS_GET变量值为{"name": "miracle", "age": "5"}
 ```
 
 [Back to Var](#variables)
@@ -522,8 +535,6 @@ ARGS_GET变量值为["miracle", "5"]
 ##ARGS_GET_NAMES
 
 table类型，querystring参数key值
-
-PS: 此变量含义同modsecurity的ARGS_GET_NAMES变量
 
 ```
 例如：GET http://www.baidu.com?name=miracle&age=5
@@ -538,8 +549,6 @@ ARGS_GET_NAMES变量值为["name", "age"]
 ##ARGS_NAMES
 
 table类型，querystring参数key值及post参数key值
-
-PS: 此变量含义同modsecurity的ARGS_NAMES变量
 
 ```
 例如：POST http://www.baidu.com?name=miracle&age=5
@@ -557,8 +566,6 @@ ARGS_NAMES变量值为["name", "age", "time", "day"]
 
 table类型，POST参数
 
-PS: 此变量含义同modsecurity的ARGS_POST变量
-
 ```
 例如：
 
@@ -566,7 +573,7 @@ POST http://www.baidu.com/login.html
 
 请求体为：time=123456&day=365
 
-ARGS_POST变量值为["123456", "365"]
+ARGS_POST变量值为{"time": "123456", "day": "365"}
 ```
 
 [Back to Var](#variables)
@@ -576,8 +583,6 @@ ARGS_POST变量值为["123456", "365"]
 ##ARGS_POST_NAMES
 
 table类型，POST参数key值
-
-PS: 此变量含义同modsecurity的ARGS_POST_NAMES变量
 
 ```
 例如：
@@ -593,9 +598,25 @@ ARGS_POST_NAMES变量值为["time", "day"]
 
 [Back to TOC](#table-of-contents)
 
+##BYTES_IN
+
+number类型，接收信息字节数
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##CONNECTION_REQUESTS
+
+number类型，当前连接中的请求数
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
 ##DURATION
 
-string类型，处理事务用时时间
+string类型，处理事务用时时间，单位秒(s)
 
 [Back to Var](#variables)
 
@@ -603,11 +624,15 @@ string类型，处理事务用时时间
 
 ##FILES
 
+table类型，从请求体中得到的原始文件名(带有文件后缀名)
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##FILES_NAMES
+
+table类型，上传文件名称（不带有后缀名）
 
 [Back to Var](#variables)
 
@@ -615,11 +640,95 @@ string类型，处理事务用时时间
 
 ##GEO
 
+table类型，包含code3,code,id,continent,name等字段信息
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##GEO_CODE3
+
+string类型，3个字母长度的国家缩写
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##GEO_CODE
+
+string类型，2个字母长度的国家缩写
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##GEO_ID
+
+number类型，国家ID
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##GEO_CONTINENT
+
+string类型，国家所在大洲
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##GEO_NAME
+
+string类型，国家全称
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##GZIP_RATIO
+
+string类型，压缩比率
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##HTTP_COOKIE
+
+string类型，请求头中的cookie字段
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##HTTP_HOST
+
+string类型，请求头中的host字段值，既域名:端口(80缺省)
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##HTTP_REFERER
+
+string类型，请求头中的referer字段
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##HTTP_USER_AGENT
+
+string类型，请求头中的user-agent字段
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##IP_VERSION
+
+string类型，IPv4 or IPv6
 
 [Back to Var](#variables)
 
@@ -627,11 +736,15 @@ string类型，处理事务用时时间
 
 ##MATCHED_VAR
 
+类型不定，当前匹配中的变量
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##MATCHED_VARS
+
+table类型，单条规则匹配中的所有变量
 
 [Back to Var](#variables)
 
@@ -639,11 +752,39 @@ string类型，处理事务用时时间
 
 ##MATCHED_VAR_NAME
 
+string类型，当前匹配中的变量名称
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##MATCHED_VARS_NAMES
+
+table类型，单条规则匹配中的所有变量名称
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##ORIGINAL_DST_ADDR
+
+string类型，服务器地址，应用代理模式为WAF地址，透明模式为后端服务器地址
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##ORIGINAL_DST_PORT
+
+string类型，服务器端口号，应用代理模式为WAF端口号，透明模式为后端服务器端口号
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##POLICYID
+
+string类型，策略ID
 
 [Back to Var](#variables)
 
@@ -651,11 +792,31 @@ string类型，处理事务用时时间
 
 ##QUERY_STRING
 
+string类型，未解码的请求参数
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##RAW_HEADER
+
+string类型，请求头信息，带请求行
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##RAW_HEADER_TRUE
+
+string类型，请求头信息，不带请求行
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##REMOTE_ADDR
+
+string类型，客户端地址
 
 [Back to Var](#variables)
 
@@ -663,11 +824,15 @@ string类型，处理事务用时时间
 
 ##REMOTE_HOST
 
+string类型，域名
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##REMOTE_PORT
+
+number类型，端口号
 
 [Back to Var](#variables)
 
@@ -675,11 +840,21 @@ string类型，处理事务用时时间
 
 ##REMOTE_USER
 
+string类型，用于身份验证的用户名
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##REQUEST_BASENAME
+
+string类型，请求的文件名
+
+```
+例如: GET http://www.baidu.com/test/login.php
+
+REQUEST_BASENAME值为/login.php
+```
 
 [Back to Var](#variables)
 
@@ -687,11 +862,15 @@ string类型，处理事务用时时间
 
 ##REQUEST_BODY
 
+类型不定，请求体
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##REQUEST_COOKIES
+
+table类型，请求携带的cookie
 
 [Back to Var](#variables)
 
@@ -699,11 +878,21 @@ string类型，处理事务用时时间
 
 ##REQUEST_COOKIES_NAMES
 
+table类型，请求携带cookie的名称
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##REQUEST_FILENAME
+
+string类型，relative request URL(相对请求路径)
+
+```
+例如: GET http://www.baidu.com/test/login.php
+
+REQUEST_FILENAME值为/test/login.php
+```
 
 [Back to Var](#variables)
 
@@ -711,11 +900,15 @@ string类型，处理事务用时时间
 
 ##REQUEST_HEADERS
 
+table类型，请求头信息
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##REQUEST_HEADERS_NAMES
+
+table类型，请求头key值
 
 [Back to Var](#variables)
 
@@ -723,11 +916,15 @@ string类型，处理事务用时时间
 
 ##REQUEST_LINE
 
+string类型，请求行
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##REQUEST_METHOD
+
+string类型，请求方法
 
 [Back to Var](#variables)
 
@@ -735,11 +932,15 @@ string类型，处理事务用时时间
 
 ##REQUEST_PROTOCOL
 
+string类型，http请求协议，如: HTTP/1.1
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##HTTP_VERSION
+
+string类型，http请求协议版本，如: 1.1
 
 [Back to Var](#variables)
 
@@ -747,11 +948,41 @@ string类型，处理事务用时时间
 
 ##URI
 
+string类型，请求路径，既不带域名，也不带参数
+
+```
+例如: GET http://www.baid.com/test/login.php?name=miracle
+
+URI变量值为/test/login.php
+```
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##URL
+
+string类型，统一资源定位符，SCHEME与HTTP_HOST与URI的拼接
+
+```
+例如: GET http://www.baid.com/test/login.php?name=miracle
+
+URL变量值为http://www.baid.com/test/login.php
+```
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##REQUEST_URI
+
+string类型，请求路径，带参数，但不带有域名
+
+```
+例如: GET http://www.baid.com/test/login.php?name=miracle
+
+REQUEST_URI变量值为/test/login.php?name=miracle
+```
 
 [Back to Var](#variables)
 
@@ -759,11 +990,15 @@ string类型，处理事务用时时间
 
 ##RESPONSE_BODY
 
+string类型，响应体
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##RESPONSE_HEADERS
+
+table类型，响应头信息
 
 [Back to Var](#variables)
 
@@ -771,11 +1006,21 @@ string类型，处理事务用时时间
 
 ##RESPONSE_STATUS
 
+function类型，响应状态码
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##SCHEME
+
+string类型，http or https
+
+```
+例如：GET http://www.baidu.com/
+
+SCHEME变量值为http
+```
 
 [Back to Var](#variables)
 
@@ -783,11 +1028,15 @@ string类型，处理事务用时时间
 
 ##SERVER_ADDR
 
+string类型，服务器地址
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##SERVER_NAME
+
+string类型，服务器名称
 
 [Back to Var](#variables)
 
@@ -795,11 +1044,15 @@ string类型，处理事务用时时间
 
 ##SERVER_PORT
 
+number类型，服务器端口号
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##SESSION
+
+table类型，第三方模块lua-resty-session提供的变量
 
 [Back to Var](#variables)
 
@@ -807,11 +1060,15 @@ string类型，处理事务用时时间
 
 ##SESSION_DATA
 
+table类型，session信息，第三方模块lua-resty-session提供的变量
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##TIME
+
+string类型，hour:minute:second
 
 [Back to Var](#variables)
 
@@ -819,11 +1076,15 @@ string类型，处理事务用时时间
 
 ##TIME_DAY
 
+number类型，天(1-31)
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##TIME_EPOCH
+
+number类型，时间戳，seconds since 1970
 
 [Back to Var](#variables)
 
@@ -831,11 +1092,15 @@ string类型，处理事务用时时间
 
 ##TIME_HOUR
 
+number类型，小时(0-23)
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##TIME_MIN
+
+number类型，分钟(0-59)
 
 [Back to Var](#variables)
 
@@ -843,11 +1108,15 @@ string类型，处理事务用时时间
 
 ##TIME_MON
 
+number类型，月份(1-12)
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##TIME_SEC
+
+number类型，秒(0-59)
 
 [Back to Var](#variables)
 
@@ -855,11 +1124,23 @@ string类型，处理事务用时时间
 
 ##TIME_WDAY
 
+number类型，周(0-6)
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##TIME_YEAR
+
+number类型，年份，four-digit，例如: 1997
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##TIME_LOCAL
+
+string类型，当前时间，例如: 26/Aug/2016:01:32:16 -0400
 
 [Back to Var](#variables)
 
@@ -867,11 +1148,23 @@ string类型，处理事务用时时间
 
 ##TX
 
+table类型，用于存储当前请求信息的变量，作用域仅仅是当前请求
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##UNIQUE_ID
+
+string类型，ID标识，随机生成的字符串，可通过配置来控制随机字符串的长度
+
+[Back to Var](#variables)
+
+[Back to TOC](#table-of-contents)
+
+##USERID
+
+string类型，从接入规则配置得到的用于ID标识
 
 [Back to Var](#variables)
 
