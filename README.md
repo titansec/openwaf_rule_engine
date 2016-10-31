@@ -110,7 +110,7 @@ Modules Configuration Directives
 ```
 
 ###state
-**syntax:** *state true|false*
+**syntax:** *"state": true|false*
 
 **default:** *true*
 
@@ -119,7 +119,7 @@ Modules Configuration Directives
 规则引擎总开关
 
 ###reqbody_state
-**syntax:** *reqbody_state true|false*
+**syntax:** *"reqbody_state"" true|false*
 
 **default:** *true*
 
@@ -128,7 +128,7 @@ Modules Configuration Directives
 请求体检测开关
 
 ###header_filter_state
-**syntax:** *header_filter_state true|false*
+**syntax:** *"header_filter_state": true|false*
 
 **default:** *true*
 
@@ -137,7 +137,7 @@ Modules Configuration Directives
 响应头检测开关
 
 ###body_filter_state
-**syntax:** *body_filter_state true|false*
+**syntax:** *"body_filter_state": true|false*
 
 **default:** *false*
 
@@ -146,7 +146,7 @@ Modules Configuration Directives
 响应体检测开关，默认关闭，若开启需添加第三方模块[ngx_http_twaf_header_sent_filter_module暂未开源]
 
 ###reqbody_limit
-**syntax:** *reqbody_limit number*
+**syntax:** *"reqbody_limit": number*
 
 **default:** *134217728*
 
@@ -157,7 +157,7 @@ Modules Configuration Directives
 PS：reqbody_limit值要小于nginx中client_body_buffer_size的值才会生效
 
 ###respbody_limit
-**syntax:** *respbody_limit number*
+**syntax:** *"respbody_limit": number*
 
 **default:** *134217728*
 
@@ -166,7 +166,7 @@ PS：reqbody_limit值要小于nginx中client_body_buffer_size的值才会生效
 响应体检测大小上限，默认134217728B(128MB)，若响应体大小超过设置上限，则不检测
 
 ###pre_path
-**syntax:** *pre_path string*
+**syntax:** *"pre_path" string*
 
 **default:** */opt/OpenWAF/*
 
@@ -175,7 +175,7 @@ PS：reqbody_limit值要小于nginx中client_body_buffer_size的值才会生效
 OpenWAF的安装路径
 
 ###path
-**syntax:** *path string*
+**syntax:** *"path": string*
 
 **default:** *lib/twaf/inc/knowledge_db/twrules*
 
@@ -184,7 +184,7 @@ OpenWAF的安装路径
 特征规则库在OpenWAF中的路径
 
 ###msg
-**syntax:** *msg table*
+**syntax:** *"msg": table*
 
 **default:** *[
             "category",
@@ -203,6 +203,94 @@ OpenWAF的安装路径
 **context:** *twaf_secrules*
 
 日志格式
+
+###user_defined_rules
+**syntax:** *"user_defined_rules": table*
+
+**default:** *none*
+
+**context:** *twaf_secrules*
+
+策略下的用户自定义特征规则
+
+系统特征规则适用于所有的策略，在引擎启动时通过加载特征库或通过API加载系统特征规则，系统特征规则一般不会动态更改
+
+用户自定义特征在策略下生效，一般用于变动较大的特征规则，如：时域控制，修改响应头等临时性规则
+
+```
+"user_defined_rules":[
+    {
+        "weight": 0,
+        "id": "1000001",
+        "release_version": "858",
+        "charactor_version": "001",
+        "disable": false,
+        "opts": {
+            "nolog": false,
+            "sanitise_arg": [
+                "password",
+                "passwd"
+            ]
+        },
+        "phase": "access",
+        "action": "deny",
+        "meta": 403,
+        "severity": "high",
+        "category": "user defined rule-time",
+        "charactor_name": "relative time",
+        "desc": "周一至周五的8点至18点，禁止访问/test目录",
+        "match": [{
+            "vars": [{
+                "var": "URI"
+            }],
+            "operator": "begins_with",
+            "pattern": "/test"
+        },
+        {
+            "vars": [{
+                "var": "TIME_WDAY"
+            }],
+            "operator": "equal",
+            "pattern": ["1", "2", "3", "4", "5"]
+        },
+        {
+            "vars": [{
+                "var": "TIME"
+            }],
+            "operator": "str_range",
+            "pattern": ["08:00:00-18:00:00"]
+        }]
+    },
+    {
+        "weight": 0,
+        "id": "1000002",
+        "release_version": "858",
+        "charactor_version": "001",
+        "disable": false,
+        "opts": {
+            "nolog": false,
+            "sanitise_arg": [
+                "password",
+                "passwd"
+            ]
+        },
+        "phase": "access",
+        "action": "deny",
+        "meta": 403,
+        "severity": "high",
+        "category": "user defined rule-iputil",
+        "charactor_name": "iputil",
+        "desc": "某ip段内不许访问",
+        "match": [{
+            "vars": [{
+               "var": "REMOTE_ADDR",
+            }],
+            "operator": "ip_utils",
+            "pattern": ["1.1.1.0/24","2.2.2.2-2.2.20.2"]
+        }]
+    }
+]
+```
 
 ###rules_id
 **syntax:** *rules_id table*
