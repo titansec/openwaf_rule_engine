@@ -471,7 +471,17 @@ Variables
 
 ##ARGS
 
-所有的请求参数，包含ARGS_GET和ARGS_POST，table类型，但只检验value，不检验NAME
+table类型，所有的请求参数，包含ARGS_GET和ARGS_POST，但只检验value，不检验NAME
+
+PS: 此变量含义同modsecurity的ARGS变量
+
+```
+例如：POST http://www.baidu.com?name=miracle&age=5
+
+请求体为：time=123456&day=365
+
+ARGS变量值为["miracle", "5", "123456", "365"]
+```
 
 [Back to Var](#variables)
 
@@ -479,11 +489,31 @@ Variables
 
 ##ARGS_COMBINED_SIZE
 
+number类型，请求参数总长度，只包含key和value的长度，不包含'&'或'='等符号
+
+PS: 此变量含义同modsecurity的ARGS_COMBINED_SIZE变量
+
+```
+例如：GET http://www.baidu.com?name=miracle&age=5
+
+ARGS_COMBINED_SIZE变量值为15，而不是18
+```
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
-##ARGS_GET 
+##ARGS_GET
+
+table类型，querystring参数
+
+PS: 此变量含义同modsecurity的ARGS_GET变量，同freewaf的URI_ARGS变量
+
+```
+例如：GET http://www.baidu.com?name=miracle&age=5
+
+ARGS_GET变量值为["miracle", "5"]
+```
 
 [Back to Var](#variables)
 
@@ -491,11 +521,33 @@ Variables
 
 ##ARGS_GET_NAMES
 
+table类型，querystring参数key值
+
+PS: 此变量含义同modsecurity的ARGS_GET_NAMES变量
+
+```
+例如：GET http://www.baidu.com?name=miracle&age=5
+
+ARGS_GET_NAMES变量值为["name", "age"]
+```
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
-##ARGS_NAMES 
+##ARGS_NAMES
+
+table类型，querystring参数key值及post参数key值
+
+PS: 此变量含义同modsecurity的ARGS_NAMES变量
+
+```
+例如：POST http://www.baidu.com?name=miracle&age=5
+
+请求体为：time=123456&day=365
+
+ARGS_NAMES变量值为["name", "age", "time", "day"]
+```
 
 [Back to Var](#variables)
 
@@ -503,17 +555,47 @@ Variables
 
 ##ARGS_POST
 
+table类型，POST参数
+
+PS: 此变量含义同modsecurity的ARGS_POST变量
+
+```
+例如：
+
+POST http://www.baidu.com/login.html
+
+请求体为：time=123456&day=365
+
+ARGS_POST变量值为["123456", "365"]
+```
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##ARGS_POST_NAMES
 
+table类型，POST参数key值
+
+PS: 此变量含义同modsecurity的ARGS_POST_NAMES变量
+
+```
+例如：
+
+POST http://www.baidu.com/login.html
+
+请求体为：time=123456&day=365
+
+ARGS_POST_NAMES变量值为["time", "day"]
+```
+
 [Back to Var](#variables)
 
 [Back to TOC](#table-of-contents)
 
 ##DURATION
+
+string类型，处理事务用时时间
 
 [Back to Var](#variables)
 
