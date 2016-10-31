@@ -23,7 +23,7 @@ Table of Contents
 Version
 =======
 
-This document describes twaf v0.01 released on 22 August July 2016.
+This document describes OpenWAF Rule Engine v0.0.1.161026_beta released on 26 Oct 2016.
 
 Synopsis
 ========
@@ -40,6 +40,23 @@ Description
 
 Community
 =========
+
+English Mailing List
+--------------------
+
+The [OpenWAF-en](https://groups.google.com/group/openwaf-en) mailing list is for English speakers.
+
+Chinese Mailing List
+--------------------
+
+The [OpenWAF-cn](https://groups.google.com/group/openwaf-cn) mailing list is for Chinese speakers.
+
+Personal QQ Mail
+----------------
+
+290557551@qq.com
+
+[Back to TOC](#table-of-contents)
 
 Bugs and Patches
 ================
