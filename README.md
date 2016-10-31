@@ -34,7 +34,7 @@ Synopsis
 Description
 ===========
 
-参考于[modsecurity](https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual)和[freewaf(lua-resty-waf)](https://github.com/p0pr0ck5/lua-resty-waf)
+规则引擎的启发来自[modsecurity](https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual)及[freewaf(lua-resty-waf)](https://github.com/p0pr0ck5/lua-resty-waf)，将ModSecurity的规则机制用lua实现。基于规则引擎可以进行协议规范，自动工具，注入攻击，跨站攻击，信息泄露，异常请求等安全防护，支持动态添加规则，及时修补漏洞。
 
 [Back to TOC](#table-of-contents)
 
