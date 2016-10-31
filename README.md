@@ -99,6 +99,8 @@ Modules Configuration Directives
                 "logdata": "%{MATCHED_VAR}"
             }
         ],
+        "user_defined_rules":[                                      -- 用户自定义规则，数组
+        ],
         "rules_id":{                                                -- 特征排除
             "111112": [{"REMOTE_HOST":"a.com", "URI":"^/ab"}]       -- 匹配中数组中信息则对应规则失效，数组中key为变量名称，值支持正则
             "111113": {}                                            -- 特征未被排除
