@@ -238,7 +238,7 @@ OpenWAF的安装路径
         "severity": "high",
         "category": "user defined rule-time",
         "charactor_name": "relative time",
-        "desc": "周一至周五的8点至18点，禁止访问/test目录",
+        "desc": "周一至周五的8点至18点，禁止访问/test目录",
         "match": [{
             "vars": [{
                 "var": "URI"
@@ -260,7 +260,7 @@ OpenWAF的安装路径
             "operator": "str_range",
             "pattern": ["08:00:00-18:00:00"]
         }]
-    },
+    },
     {
         "weight": 0,
         "id": "1000002",
