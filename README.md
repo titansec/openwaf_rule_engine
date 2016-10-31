@@ -14,7 +14,7 @@ Table of Contents
 * [Bugs and Patches](#bugs-and-patches)
 * [Changes](#changes)
 * [Modules Configuration Directives](#modules-configuration-directives)
-* [Directives](#directives)
+* [Rule Directives](#rule-directives)
 * [Variables](#variables)
 * [Transformation Functions](#transformation-functions)
 * [Operators](#operators)
@@ -303,13 +303,10 @@ OpenWAF的安装路径
 
 [Back to TOC](#table-of-contents)
 
-Directives
-==========
-```lua
-local _M = {}
-
-_M.rules = {
-{
+Rule Directives
+===============
+```txt
+-- lua格式
     {
         id = "000001",                             -- ID标识(唯一)，string类型
         release_version = "858",                   -- 特征库版本，string类型
@@ -319,12 +316,15 @@ _M.rules = {
         charactor_name = "test",                   -- 特征名称，string类型
         opts = {                                   -- 其余动作
             nolog = false,                         -- 不记日志，true or false，默认false
+            add_resp_headers = {                   -- 自定义响应头
+                key_xxx = "value_xxx"              -- 响应头名称 = 响应头值
+            }
             setvar = {{                            -- 设置变量，数组
-                "column":"test",                   -- 变量的一级key，如：TX，session等，string类型
-                "key":"test",                      -- 变量的二级key，如：score, id等，string类型
-                "incr": true,                      -- 同modsec中的=+操作， true or false，默认false
-                "value": 5,                        -- 变量值，number类型
-                "time":3000                        -- 超时时间(ms)，number类型
+                column = "test",                   -- 变量的一级key，如：TX，session等，string类型
+                key = "test",                      -- 变量的二级key，如：score, id等，string类型
+                incr = true,                       -- 同modsec中的=+操作， true or false，默认false
+                value = 5,                         -- 变量值，number类型
+                time = 3000                        -- 超时时间(ms)，number类型
             }}
         },
         phase = "test",                            -- 执行阶段（"access","header_filter","body_filter"），支持数组和字符串
@@ -335,7 +335,6 @@ _M.rules = {
             {
                 vars = {{                          -- 数组取代modsec中的"|"，处理多个var
                     var = "test",                  -- 变量名称，string类型
-                    storage = true,                -- 跨请求获取信息，true or false，默认false
                     phase = "test",                -- 执行阶段，若为空，则查找上一级别的phase字段，string类型
                     parse = {                      -- 对变量的解析，下面的操作只能出现一种
                         specific = "test",         -- 具体化，取代modsec中的":",支持数组，TODO:支持正则，如modsec的"/ /"，支持字符串和数组
@@ -345,14 +344,68 @@ _M.rules = {
                         all = "test"               -- 取出所有的key和value，true or false，默认false
                     }
                 }},
-                transform = "test1",               -- 转换操作,支持字符串和数组
+                transform = "test",                -- 转换操作,支持字符串和数组
                 operator = "test",                 -- 操作，string类型
-                pattern = "test"                   -- 操作参数，支持boolean、number、字符串和数组
+                pattern = "test",                  -- 操作参数，支持boolean、number、字符串和数组
+                pf = "file_path",                  -- 操作参数，文件路径
                 op_negated = true                  -- 操作取反，true or false，默认false
-            }
+            },
+            {match_info2},
+            {match_info3},
+            ....
         }
     }
-}
+
+--json格式
+    {
+        "id": "000001",
+        "release_version": "858",
+        "charactor_version": "001",
+        "severity": "test",
+        "category": "test",
+        "charactor_name": "test",
+        "opts": {
+            "nolog": false,
+            "add_resp_headers": {
+                "key_xxx": "value_xxx"
+            },
+            "setvar": [{
+                "column":"test",
+                "key":"test",
+                "incr": true,
+                "value": 5,
+                "time":3000
+            }]
+        },
+        "phase": "test",
+        "action": "test",
+        "desc": "test",
+        "tags": ["test1", "test2"]
+        "match": [
+            {
+                "vars": [{
+                    "var": "test",
+                    "storage": true,
+                    "phase": "test",
+                    "parse": {
+                        "specific": "test",
+                        "ignore": "test",
+                        "keys": true,
+                        "values": "test",
+                        "all": "test"
+                    }
+                }],
+                "transform": "test",
+                "operator": "test",
+                "pattern": "test",
+                "pf": "file_path",
+                "op_negated": true
+            },
+            {"match_info2"},
+            {"match_info3"},
+            ...
+        ]
+    }
 ```
 
 Variables
