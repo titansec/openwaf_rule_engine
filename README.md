@@ -1433,11 +1433,30 @@ Operators
 
 ##begins_with
 
+Returns true if the parameter string is found at the beginning of the input.
+
 [Back to OPERATORS](#operators)
 
 [Back to TOC](#table-of-contents)
 
 ##contains
+
+Returns true if the parameter string is found anywhere in the input.
+
+operator为contains且pattern为数组，相当于modsecurity的pm
+
+PS: modsecurity的pm忽略大小写，OpenWAF中contains不忽略大小写
+
+```
+例如:
+{
+    "id": "xxx",
+    ...
+    "operator": "contains",
+    "pattern": ["abc", "def"],
+    ...
+}
+```
 
 [Back to OPERATORS](#operators)
 
@@ -1445,11 +1464,15 @@ Operators
 
 ##contains_word
 
+Returns true if the parameter string (with word boundaries) is found anywhere in the input.
+
 [Back to OPERATORS](#operators)
 
 [Back to TOC](#table-of-contents)
 
 ##detect_sqli
+
+This operator uses LibInjection to detect SQLi attacks.
 
 [Back to OPERATORS](#operators)
 
@@ -1457,11 +1480,15 @@ Operators
 
 ##detect_xss
 
+This operator uses LibInjection to detect XSS attacks.
+
 [Back to OPERATORS](#operators)
 
 [Back to TOC](#table-of-contents)
 
 ##ends_with
+
+Returns true if the parameter string is found at the end of the input.
 
 [Back to OPERATORS](#operators)
 
@@ -1469,11 +1496,30 @@ Operators
 
 ##equal
 
+Performs a string comparison and returns true if the parameter string is identical to the input string.
+
+相当于modsecurity的eq和streq
+
+```
+例如:
+{
+    "id": "xxx",
+    ...
+    "operator": "equal",
+    "pattern": [12345, "html", "23456"]
+    ...
+}
+```
+
 [Back to OPERATORS](#operators)
 
 [Back to TOC](#table-of-contents)
 
 ##greater_eq
+
+Performs numerical comparison and returns true if the input value is greater than or equal to the provided parameter.
+
+return false, if a value is provided that cannot be converted to a number.
 
 [Back to OPERATORS](#operators)
 
@@ -1481,11 +1527,39 @@ Operators
 
 ##greater
 
+Performs numerical comparison and returns true if the input value is greater than the operator parameter.
+
+return false, if a value is provided that cannot be converted to a number.
+
 [Back to OPERATORS](#operators)
 
 [Back to TOC](#table-of-contents)
 
 ##ip_utils
+
+Performs a fast ipv4 or ipv6 match of REMOTE_ADDR variable data. Can handle the following formats:
+
+Full IPv4 Address: 192.168.1.100
+Network Block/CIDR Address: 192.168.1.0/24
+IPv4 Address Region: 1.1.1.1-2.2.2.2
+
+ip_utils与pf的组合相当于modsecurity中的ipMatchF和ipMatchFromFile
+
+```
+例如:
+规则如下：
+{
+    "id": "xxxx",
+    ...
+    "operator": "ip_utils",
+    "pf": "/tmp/ip_blacklist.txt",
+    ...
+}
+"/tmp/ip_blacklist.txt"文件内容如下：
+192.168.1.100
+192.168.1.0/24
+1.1.1.1-2.2.2.2
+```
 
 [Back to OPERATORS](#operators)
 
@@ -1493,11 +1567,19 @@ Operators
 
 ##less_eq
 
+Performs numerical comparison and returns true if the input value is less than or equal to the operator parameter.
+
+return false, if a value is provided that cannot be converted to a number.
+
 [Back to OPERATORS](#operators)
 
 [Back to TOC](#table-of-contents)
 
 ##less
+
+Performs numerical comparison and returns true if the input value is less than to the operator parameter.
+
+return false, if a value is provided that cannot be converted to a number.
 
 [Back to OPERATORS](#operators)
 
@@ -1505,11 +1587,21 @@ Operators
 
 ##pf
 
+pattern是operator操作的参数
+
+pf是指pattern from file，与pattern互斥（二者不可同时出现），目前仅支持绝对路径
+
+pf与contains组合，相当于modsecurity的pmf或pmFromFile
+
+pf与ip_utils组合，相当于modsecurity的ipMatchF或ipMatchFromFile
+
 [Back to OPERATORS](#operators)
 
 [Back to TOC](#table-of-contents)
 
 ##regex
+
+Performs a regular expression match of the pattern provided as parameter. 
 
 [Back to OPERATORS](#operators)
 
@@ -1517,11 +1609,15 @@ Operators
 
 ##str_match
 
+等同于contains
+
 [Back to OPERATORS](#operators)
 
 [Back to TOC](#table-of-contents)
 
 ##validate_url_encoding
+
+Validates the URL-encoded characters in the provided input string.
 
 [Back to OPERATORS](#operators)
 
@@ -1529,11 +1625,39 @@ Operators
 
 ##num_range
 
+判断是否在数字范围内
+
+它与transform的length组合，相当于modsecurity的validateByteRange
+
+```
+{
+    "id": "xxx",
+    ...
+    "operator": "num_range",
+    "pattern": [10, "13", "32-126"],
+    "transform": "length",
+    ...
+}
+```
+
 [Back to OPERATORS](#operators)
 
 [Back to TOC](#table-of-contents)
 
 ##str_range
+
+判断是否在字符串范围内
+
+```
+例如时间区间判断:
+{
+    "id": "xxx",
+    ...
+    "operator": "str_range",
+    "pattern": ["01:42:00-04:32:00"],
+    ...
+}
+```
 
 [Back to OPERATORS](#operators)
 
