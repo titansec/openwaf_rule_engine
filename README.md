@@ -331,22 +331,22 @@ Rule Directives
         action = "test",                           -- 动作，ALLOW，DENY等，string类型
         desc = "test",                             -- 描述语句
         tags = {"test1", "test2"},                 -- 标签
-        match = {                                  -- match之间是与的关系，数组
+        match = {                                  -- 数组，match之间是“与”的关系，相当于modsecurity的action中chain的功能
             {
-                vars = {{                          -- 数组取代modsec中的"|"，处理多个var
+                vars = {{                          -- 数组，或的关系，取代modsec中的"|"，处理多个变量，
                     var = "test",                  -- 变量名称，string类型
-                    phase = "test",                -- 执行阶段，若为空，则查找上一级别的phase字段，string类型
                     parse = {                      -- 对变量的解析，下面的操作只能出现一种
                         specific = "test",         -- 具体化，取代modsec中的":",支持数组，TODO:支持正则，如modsec的"/ /"，支持字符串和数组
                         ignore = "test",           -- 忽略某个值,取代modsec中的"!"，TODO:支持正则，如modsec的"/ /"，支持字符串和数组
-                        keys = true,               -- 取出所有的key，true or false，默认false
-                        values = "test",           -- 取出所有的value，true or false，默认false
-                        all = "test"               -- 取出所有的key和value，true or false，默认false
+                        keys = true|false,         -- 取出所有的key，true or false，默认false
+                        values = true|false,       -- 取出所有的value，true or false，默认false
+                        all = true|false           -- 取出所有的key和value，true or false，默认false
                     }
                 }},
                 transform = "test",                -- 转换操作,支持字符串和数组
                 operator = "test",                 -- 操作，string类型
                 pattern = "test",                  -- 操作参数，支持boolean、number、字符串和数组
+                parse_pattern = true|false,        -- 是否解析pattern参数（目前不支持与pf组合），如pattern参数为"%{TX.1}"
                 pf = "file_path",                  -- 操作参数，文件路径
                 op_negated = true                  -- 操作取反，true or false，默认false
             },
@@ -358,7 +358,7 @@ Rule Directives
 
 --json格式
     {
-        "id": "000001",
+        "id": "xxxxxx",
         "release_version": "858",
         "charactor_version": "001",
         "severity": "test",
@@ -398,6 +398,7 @@ Rule Directives
                 "transform": "test",
                 "operator": "test",
                 "pattern": "test",
+                "parse_pattern": true|false,
                 "pf": "file_path",
                 "op_negated": true
             },
@@ -1603,6 +1604,64 @@ pf与ip_utils组合，相当于modsecurity的ipMatchF或ipMatchFromFile
 
 Performs a regular expression match of the pattern provided as parameter. 
 
+regex还有modecurity的capture捕获功能
+
+modsecurity有关capture的描述如下：
+When used together with the regular expression operator (@rx), the capture action will create copies of the regular expression captures and place them into the transaction variable collection.
+
+OpenWAF中无capture指令，但使用regex默认开启capture功能
+
+```
+例如:
+{
+    "id": "000031",
+    "release_version": "858",
+    "charactor_version": "001",
+    "opts": {
+        "nolog": false
+    },
+    "phase": "access",
+    "action": "deny",
+    "meta": 403,
+    "severity": "low",
+    "category": "5Y2P6K6u6KeE6IyD",
+    "charactor_name": "cHJvdG9jb2wucmVxSGVhZGVyLmM=",
+    "desc": "协议规范性约束，检测含有不合规Range或Request-Range值的HTTP请求",
+    "match": [
+        {
+            "vars": [
+                {
+                    "var": "REQUEST_HEADERS",
+                    "parse": {
+                        "specific": "Range"
+                    }
+                },
+                {
+                    "var": "REQUEST_HEADERS",
+                    "parse": {
+                        "specific": "Request-Range"
+                    }
+                }
+            ],
+            "operator": "regex",
+            "pattern": "(\\d+)\\-(\\d+)\\,"
+        },
+        {
+            "vars": [{
+                "var": "TX",
+                "parse": {
+                    "specific": "2"
+                }
+            }],
+            "operator": "greater_eq",
+            "pattern": "%{TX.1}",
+            "parse_pattern": true,
+            "op_negated": true
+        }
+    ]
+}
+```
+
 [Back to OPERATORS](#operators)
 
 [Back to TOC](#table-of-contents)
@@ -1664,9 +1723,135 @@ Validates the URL-encoded characters in the provided input string.
 [Back to TOC](#table-of-contents)
 
 
-Options
-=======
+Others
+======
 
-[Back to OPTIONS](#options)
+* [allow](#allow)
+* [deny](#deny)
+* [nolog](#nolog)
+* [pass](#pass)
+* [phase](#phase)
+* [redirect](#redirect)
+* [charactor_version](#charactor_version)
+* [severity](#severity)
+* [nolog](#nolog)
+* [nolog](#nolog)
+
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##allow
+
+Stops rule processing of the current phase on a successful match and allows the transaction to proceed.
+
+```
+"action": "allow"
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##deny
+
+Stops rule processing and intercepts transaction.
+
+```
+"action": "deny",
+"meta": 403
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##nolog
+
+不记录日志
+
+```
+"opts": {
+    "nolog": true
+}
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##pass
+
+Continues processing with the next rule in spite of a successful match.
+
+```
+"action": "pass"
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##phase
+
+规则执行的阶段，取值可为"access","header_filter","body_filter"的组合
+
+```
+{
+    "id": "xxx_01",
+    "phase": "access",
+    ...
+}
+"xxx_01"规则在access阶段执行
+
+{
+    "id": "xxx_02",
+    "phase": ["access", "header_filter"],
+    ...
+}
+"xxx_02规则在access阶段和"header_filter"阶段各执行一次
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##redirect
+
+```
+"action": "redirect",
+"meta": "/index.html"
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##charactor_version
+
+指定此条规则的版本，同modsecurity中Action的rev功能
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##severity
+
+Assigns severity to the rule in which it is used.
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##nolo
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##nolo
+
+[Back to OTHERS](#others)
 
 [Back to TOC](#table-of-contents)
