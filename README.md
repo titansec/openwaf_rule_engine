@@ -18,7 +18,7 @@ Table of Contents
 * [Variables](#variables)
 * [Transformation Functions](#transformation-functions)
 * [Operators](#operators)
-* [Options](#options)
+* [Others](#others)
 
 Version
 =======
