@@ -1202,11 +1202,29 @@ Transformation Functions
 
 ##base64_decode
 
+Decodes a Base64-encoded string.
+
+Note: 注意transform的执行顺序
+
+```
+例如：
+{
+   "id": "xxxx",
+   ...
+   "transform": ["base64_decode", "lowercase"],
+   ...
+}
+
+先执行base64解码，然后字符串最小化，若顺序调换，会影响结果
+```
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##sql_hex_decode
+
+Decode sql hex data.
 
 [Back to TFF](#transformation-functions)
 
@@ -1214,11 +1232,15 @@ Transformation Functions
 
 ##base64_encode
 
+Encodes input string using Base64 encoding.
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##counter
+
+计数，相当于modsecurity中的'&'符号
 
 [Back to TFF](#transformation-functions)
 
@@ -1226,11 +1248,15 @@ Transformation Functions
 
 ##compress_whitespace
 
+Converts any of the whitespace characters (0x20, \f, \t, \n, \r, \v, 0xa0) to spaces (ASCII 0x20), compressing multiple consecutive space characters into one.
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##hex_decode
+
+Decodes a string that has been encoded using the same algorithm as the one used in hexEncode 
 
 [Back to TFF](#transformation-functions)
 
@@ -1238,11 +1264,15 @@ Transformation Functions
 
 ##hex_encode
 
+Encodes string (possibly containing binary characters) by replacing each input byte with two hexadecimal characters.
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##html_decode
+
+Decodes the characters encoded as HTML entities.
 
 [Back to TFF](#transformation-functions)
 
@@ -1250,11 +1280,15 @@ Transformation Functions
 
 ##length
 
+Looks up the length of the input string in bytes
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##lowercase
+
+Converts all characters to lowercase
 
 [Back to TFF](#transformation-functions)
 
@@ -1262,11 +1296,15 @@ Transformation Functions
 
 ##md5
 
+Calculates an MD5 hash from the data in input. The computed hash is in a raw binary form and may need encoded into text to be printed (or logged). Hash functions are commonly used in combination with hex_encode (for example: "transform": ["md5", "hex_encode").
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##normalise_path
+
+Removes multiple slashes, directory self-references, and directory back-references (except when at the beginning of the input) from input string.
 
 [Back to TFF](#transformation-functions)
 
@@ -1274,11 +1312,17 @@ Transformation Functions
 
 ##remove_nulls
 
+Removes all NUL bytes from input
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##remove_whitespace
+
+Removes all whitespace characters from input.
+
+移除空白字符\s，包含水平定位字符 ('\t')、归位键('\r')、换行('\n')、垂直定位字符('\v')或翻页('\f')等
 
 [Back to TFF](#transformation-functions)
 
@@ -1286,11 +1330,15 @@ Transformation Functions
 
 ##replace_comments
 
+用一个空格代替/*...*/注释内容
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##remove_comments_char
+
+Removes common comments chars (/*, */, --, #).
 
 [Back to TFF](#transformation-functions)
 
@@ -1298,11 +1346,20 @@ Transformation Functions
 
 ##remove_comments
 
+去掉/*...*/注释内容
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##uri_decode
+
+Unescape str as an escaped URI component.
+
+```
+例如: 
+"b%20r56+7" 使用uri_decode转换后为 b r56 7
+```
 
 [Back to TFF](#transformation-functions)
 
@@ -1310,11 +1367,15 @@ Transformation Functions
 
 ##uri_encode
 
+Escape str as a URI component.
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##sha1
+
+Calculates a SHA1 hash from the input string. The computed hash is in a raw binary form and may need encoded into text to be printed (or logged). Hash functions are commonly used in combination with hex_encode (for example, "transform": ["sha1", "hex_encode"]).
 
 [Back to TFF](#transformation-functions)
 
@@ -1322,17 +1383,23 @@ Transformation Functions
 
 ##trim_left
 
+Removes whitespace from the left side of the input string.
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##trim_right
 
+Removes whitespace from the right side of the input string.
+
 [Back to TFF](#transformation-functions)
 
 [Back to TOC](#table-of-contents)
 
 ##trim
+
+Removes whitespace from both the left and right sides of the input string.
 
 [Back to TFF](#transformation-functions)
 
