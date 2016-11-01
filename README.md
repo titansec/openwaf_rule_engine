@@ -220,17 +220,12 @@ OpenWAF的安装路径
 ```json
 "user_defined_rules":[
     {
-        "weight": 0,
         "id": "1000001",
         "release_version": "858",
         "charactor_version": "001",
         "disable": false,
         "opts": {
-            "nolog": false,
-            "sanitise_arg": [
-                "password",
-                "passwd"
-            ]
+            "nolog": false
         },
         "phase": "access",
         "action": "deny",
@@ -262,17 +257,12 @@ OpenWAF的安装路径
         }]
     },
     {
-        "weight": 0,
         "id": "1000002",
         "release_version": "858",
         "charactor_version": "001",
         "disable": false,
         "opts": {
-            "nolog": false,
-            "sanitise_arg": [
-                "password",
-                "passwd"
-            ]
+            "nolog": false
         },
         "phase": "access",
         "action": "deny",
@@ -308,7 +298,7 @@ Rule Directives
 ```txt
 -- lua格式
     {
-        id = "000001",                             -- ID标识(唯一)，string类型
+        id = "xxxxxx",                             -- ID标识(唯一)，string类型
         release_version = "858",                   -- 特征库版本，string类型
         charactor_version = "001",                 -- 特征规则版本，string类型
         severity = "low",                          -- 严重等级，OPENWAF中使用"low"，"medium","high"等，string类型
@@ -338,9 +328,9 @@ Rule Directives
                     parse = {                      -- 对变量的解析，下面的操作只能出现一种
                         specific = "test",         -- 具体化，取代modsec中的":",支持数组，TODO:支持正则，如modsec的"/ /"，支持字符串和数组
                         ignore = "test",           -- 忽略某个值,取代modsec中的"!"，TODO:支持正则，如modsec的"/ /"，支持字符串和数组
-                        keys = true|false,         -- 取出所有的key，true or false，默认false
-                        values = true|false,       -- 取出所有的value，true or false，默认false
-                        all = true|false           -- 取出所有的key和value，true or false，默认false
+                        keys = true,               -- 取出所有的key
+                        values = true,             -- 取出所有的value
+                        all = true                 -- 取出所有的key和value
                     }
                 }},
                 transform = "test",                -- 转换操作,支持字符串和数组
@@ -1728,14 +1718,22 @@ Others
 
 * [allow](#allow)
 * [deny](#deny)
+* [id](#id)
 * [nolog](#nolog)
+* [op_negated](#op_negated)
+* [parse](#parse)
 * [pass](#pass)
 * [phase](#phase)
 * [redirect](#redirect)
 * [charactor_version](#charactor_version)
 * [severity](#severity)
-* [nolog](#nolog)
-* [nolog](#nolog)
+* [setvar](#setvar)
+* [meta](#meta)
+* [transform](#transform)
+* [tag](#tag)
+* [release_version](#release_version)
+* [robot](#robot)
+* [add_resp_headers](#add_resp_headers)
 
 
 [Back to OTHERS](#others)
@@ -1767,6 +1765,18 @@ Stops rule processing and intercepts transaction.
 
 [Back to TOC](#table-of-contents)
 
+##id
+
+Stops rule processing and intercepts transaction.
+
+```
+"id": "xxxxxxx"
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
 ##nolog
 
 不记录日志
@@ -1775,6 +1785,136 @@ Stops rule processing and intercepts transaction.
 "opts": {
     "nolog": true
 }
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##op_negated
+
+对operator结果的取反
+
+```
+"match": [{
+    "vars": [{
+        "var": "HTTP_USER_AGENT"
+    }],
+    "transform": "length",
+    "operator": "less_eq",
+    "pattern": 50,
+    "op_negated": true
+}]
+
+等价于
+
+"match": [{
+    "vars": [{
+        "var": "HTTP_USER_AGENT"
+    }],
+    "transform": "length",
+    "operator": "greater",
+    "pattern": 50
+}]
+
+若请求头中user_agent字段长度大于50，则匹配中此条规则
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##parse
+
+对变量进一步解析
+
+```
+若请求GET http://www.baidu.com?name=miracle&age=5
+
+"match": [{
+    "vars": [{
+        "var": "ARGS_GET"
+    }]，
+    ...
+}]
+得到的值为{"name": "miracle", "age": "5"}
+
+
+"match": [{
+    "vars": [{
+        "var": "ARGS_GET",
+        "parse": {
+            "specific": "name"
+        }
+    }]
+}]
+得到的值为["miracle"]
+
+
+"match": [{
+    "vars": [{
+        "var": "ARGS_GET",
+        "parse": {
+            "specific": ["name", "age"]
+        }
+    }]
+}]
+得到的值为["miracle", "5"]
+
+
+"match": [{
+    "vars": [{
+        "var": "ARGS_GET",
+        "parse": {
+            "ignore": "name"
+        }
+    }]
+}]
+得到的值为{"age": "5"}
+
+
+"match": [{
+    "vars": [{
+        "var": "ARGS_GET",
+        "parse": {
+            "ignore": ["name", "age"]
+        }
+    }]
+}]
+得到的值为[]
+
+
+"match": [{
+    "vars": [{
+        "var": "ARGS_GET",
+        "parse": {
+            "keys": true
+        }
+    }]
+}]
+得到的值为["name", "age"]
+
+
+"match": [{
+    "vars": [{
+        "var": "ARGS_GET",
+        "parse": {
+            "values": true
+        }
+    }]
+}]
+得到的值为["miracle", "5"]
+
+
+"match": [{
+    "vars": [{
+        "var": "ARGS_GET",
+        "parse": {
+            "all": true
+        }
+    }]
+}]
+得到的值为["name", "age", "miracle", "5"]
 ```
 
 [Back to OTHERS](#others)
@@ -1832,6 +1972,10 @@ Continues processing with the next rule in spite of a successful match.
 
 指定此条规则的版本，同modsecurity中Action的rev功能
 
+```
+"charactor_version": "001"
+```
+
 [Back to OTHERS](#others)
 
 [Back to TOC](#table-of-contents)
@@ -1840,17 +1984,144 @@ Continues processing with the next rule in spite of a successful match.
 
 Assigns severity to the rule in which it is used.
 
+The data below is used by the OWASP ModSecurity Core Rule Set (CRS):
+
+EMERGENCY: is generated from correlation of anomaly scoring data where there is an inbound attack and an outbound leakage.
+ALERT: is generated from correlation where there is an inbound attack and an outbound application level error.
+CRITICAL: Anomaly Score of 5. Is the highest severity level possible without correlation. It is normally generated by the web attack rules (40 level files).
+ERROR: Error - Anomaly Score of 4. Is generated mostly from outbound leakage rules (50 level files).
+WARNING: Anomaly Score of 3. Is generated by malicious client rules (35 level files).
+NOTICE: Anomaly Score of 2. Is generated by the Protocol policy and anomaly files.
+INFO
+DEBUG
+
+也可自定义严重等级，如:low，medium，high，critical等
+
+```
+"severity": "high"
+```
+
 [Back to OTHERS](#others)
 
 [Back to TOC](#table-of-contents)
 
-##nolo
+##setvar
+
+Creates, removes, or updates a variable. 
+
+```
+{
+    "id": "xxx_01",
+    "opts":{
+        "nolog": false,
+        "setvar": [{
+            "column": "TX",
+            "key": "score",
+            "value": 5,
+            "incr": true
+        }]
+    },
+    ...
+}
+"xxx_01"规则中，给变量TX中score成员的值加5，若TX中无score成员，则初始化为0，再加5
+
+{
+    "id": "xxx_02",
+    "opts":{
+        "nolog": false,
+        "setvar": [{
+            "column": "TX",
+            "key": "score",
+            "value": 5
+        }]
+    },
+    ...
+}
+
+"xxx_02"规则中，给变量TX中score成员的值赋为5
+```
 
 [Back to OTHERS](#others)
 
 [Back to TOC](#table-of-contents)
 
-##nolo
+##meta
+
+"action"的附属信息
+
+```
+若"action"为"deny"，则"meta"为响应码
+"action": "deny",
+"meta": 403
+
+若"action"为"redirect"，则"meta"为重定向地址
+"action": "redirect",
+"meta": "/index.html"
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##transform
+
+This action is used to specify the transformation pipeline to use to transform the value of each variable used in the rule before matching.
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##tag
+
+Assigns a tag (category) to a rule.
+
+```
+支持数组    "tag": ["xxx_1", "xxx_2"]
+支持字符串  "tag": "xxx_3"
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##release_version
+
+规则集版本，等同于modsecurity中Action的ver功能
+
+```
+"release_version": "858"
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##robot
+
+人机识别
+
+需提前配置人机识别模块配置，此功能暂未放开
+
+```
+"action": "robot"
+```
+
+[Back to OTHERS](#others)
+
+[Back to TOC](#table-of-contents)
+
+##add_resp_headers
+
+增删改响应头
+
+```
+例如隐藏server字段:
+"opts": {
+    "add"_resp_headers": {
+        "server": ""
+    }
+}
+```
 
 [Back to OTHERS](#others)
 
