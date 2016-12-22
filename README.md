@@ -317,6 +317,7 @@ Rule Directives
         "charactor_version": "001",
         "severity": "test",
         "rule_name": "test",
+        "disable": false, 
         "opts": {
             "nolog": false,
             "add_resp_headers": {
