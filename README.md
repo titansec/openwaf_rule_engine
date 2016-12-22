@@ -86,19 +86,6 @@ Modules Configuration Directives
         "respbody_limit":524288,                                    -- 响应体检测阈值，大于阈值不检测
         "pre_path": "/opt/OpenWAF/",                                -- OpenWAF安装路径
         "path": "lib/twaf/inc/knowledge_db/twrules",                -- 特征规则库在OpenWAF中的路径
-        "msg": [                                                    -- 日志格式
-            "category",
-            "severity",
-            "action",
-            "meta",
-            "version",
-            "id",
-            "charactor_name",
-            {                                                       -- 字典中为变量
-                "transaction_time": "%{DURATION}",
-                "logdata": "%{MATCHED_VAR}"
-            }
-        ],
         "user_defined_rules":[                                      -- 用户自定义规则，数组
         ],
         "rules_id":{                                                -- 特征排除
@@ -183,27 +170,6 @@ OpenWAF的安装路径
 
 特征规则库在OpenWAF中的路径
 
-###msg
-**syntax:** *"msg": table*
-
-**default:** *[
-            "category",
-            "severity",
-            "action",
-            "meta",
-            "version",
-            "id",
-            "charactor_name",
-            {
-                "transaction_time": "%{DURATION}",
-                "logdata": "%{MATCHED_VAR}"
-            }
-        ]*
-
-**context:** *twaf_secrules*
-
-日志格式
-
 ###user_defined_rules
 **syntax:** *"user_defined_rules": table*
 
@@ -231,8 +197,7 @@ OpenWAF的安装路径
         "action": "deny",
         "meta": 403,
         "severity": "high",
-        "category": "user defined rule-time",
-        "charactor_name": "relative time",
+        "rule_name": "relative time",
         "desc": "周一至周五的8点至18点，禁止访问/test目录",
         "match": [{
             "vars": [{
@@ -268,8 +233,7 @@ OpenWAF的安装路径
         "action": "deny",
         "meta": 403,
         "severity": "high",
-        "category": "user defined rule-iputil",
-        "charactor_name": "iputil",
+        "rule_name": "iputil",
         "desc": "某ip段内不许访问",
         "match": [{
             "vars": [{
@@ -302,9 +266,9 @@ Rule Directives
         release_version = "858",                   -- 特征库版本，string类型
         charactor_version = "001",                 -- 特征规则版本，string类型
         severity = "low",                          -- 严重等级，OPENWAF中使用"low"，"medium","high"等，string类型
-        category = "test",                         -- 分类，string类型
-        charactor_name = "test",                   -- 特征名称，string类型
-        opts = {                                   -- 其余动作
+        rule_name = "test",                        -- 特征名称，string类型
+        disable = false,                           -- 禁用此规则，boolean类型
+        opts = {                                   -- 其余动作
             nolog = false,                         -- 不记日志，true or false，默认false
             add_resp_headers = {                   -- 自定义响应头
                 key_xxx = "value_xxx"              -- 响应头名称 = 响应头值
@@ -352,8 +316,7 @@ Rule Directives
         "release_version": "858",
         "charactor_version": "001",
         "severity": "test",
-        "category": "test",
-        "charactor_name": "test",
+        "rule_name": "test",
         "opts": {
             "nolog": false,
             "add_resp_headers": {
