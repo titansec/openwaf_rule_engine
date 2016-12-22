@@ -1587,8 +1587,7 @@ OpenWAF中无capture指令，但使用regex默认开启capture功能
     "action": "deny",
     "meta": 403,
     "severity": "low",
-    "category": "5Y2P6K6u6KeE6IyD",
-    "charactor_name": "cHJvdG9jb2wucmVxSGVhZGVyLmM=",
+    "rule_name": "protocol.reqHeader.c",
     "desc": "协议规范性约束，检测含有不合规Range或Request-Range值的HTTP请求",
     "match": [
         {
