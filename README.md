@@ -82,22 +82,23 @@ Modules Configuration Directives
         "reqbody_state": true,                                      -- 请求体检测开关
         "header_filter_state": true,                                -- 响应头检测开关
         "body_filter_state": true,                                  -- 响应体检测开关
+        "system_rules_state": true,                                 -- 系统规则集检测开关
         "reqbody_limit":134217728,                                  -- 请求体检测阈值，大于阈值不检测
         "respbody_limit":524288,                                    -- 响应体检测阈值，大于阈值不检测
         "pre_path": "/opt/OpenWAF/",                                -- OpenWAF安装路径
         "path": "lib/twaf/inc/knowledge_db/twrules",                -- 特征规则库在OpenWAF中的路径
-        "user_defined_rules":[                                      -- 用户自定义规则，数组
-        ],
+        "user_defined_rules":[ ],                                   -- 用户自定义规则，数组
         "rules_id":{                                                -- 特征排除
-            "111112": [{"REMOTE_HOST":"a.com", "URI":"^/ab"}]       -- 匹配中数组中信息则对应规则失效，数组中key为变量名称，值支持正则
-            "111113": []                                            -- 特征未被排除
+            "111112": [{"REMOTE_HOST":"a.com", "URI":"^/ab"}],      -- 匹配中数组中信息则对应规则失效，数组中key为变量名称，值支持正则
+            "111113": {},                                           -- 特征未被排除
             "111114": [{}]                                          -- 特征被无条件排除
         }
     }
 ```
 
-###state
-**syntax:** *"state": true|false*
+state
+-----
+**syntax:** *state true|false*
 
 **default:** *true*
 
@@ -105,8 +106,9 @@ Modules Configuration Directives
 
 规则引擎总开关
 
-###reqbody_state
-**syntax:** *"reqbody_state"" true|false*
+reqbody_state
+-------------
+**syntax:** *reqbody_state true|false*
 
 **default:** *true*
 
@@ -114,8 +116,9 @@ Modules Configuration Directives
 
 请求体检测开关
 
-###header_filter_state
-**syntax:** *"header_filter_state": true|false*
+header_filter_state
+-------------------
+**syntax:** *header_filter_state true|false*
 
 **default:** *true*
 
@@ -123,8 +126,9 @@ Modules Configuration Directives
 
 响应头检测开关
 
-###body_filter_state
-**syntax:** *"body_filter_state": true|false*
+body_filter_state
+-----------------
+**syntax:** *body_filter_state true|false*
 
 **default:** *false*
 
@@ -132,8 +136,25 @@ Modules Configuration Directives
 
 响应体检测开关，默认关闭，若开启需添加第三方模块[ngx_http_twaf_header_sent_filter_module暂未开源]
 
-###reqbody_limit
-**syntax:** *"reqbody_limit": number*
+system_rules_state
+-----------------
+**syntax:** *system_rules_state true|false*
+
+**default:** *true*
+
+**context:** *twaf_secrules*
+
+系统规则集检测开关
+
+lib/twaf/inc/knowledge_db/twrules 目录下的规则，都是系统规则
+
+除了系统规则外，还有 twaf_secrules 模块下 user_defined_rules 的用户自定义规则
+
+系统规则一般很少改动，而用户自定义规则却随着业务而增减，如动态配置缓存、压缩、时域控制和黑白名单等。
+
+reqbody_limit
+-------------
+**syntax:** *reqbody_limit number*
 
 **default:** *134217728*
 
@@ -143,8 +164,9 @@ Modules Configuration Directives
 
 PS：reqbody_limit值要小于nginx中client_body_buffer_size的值才会生效
 
-###respbody_limit
-**syntax:** *"respbody_limit": number*
+respbody_limit
+--------------
+**syntax:** *respbody_limit number*
 
 **default:** *134217728*
 
@@ -152,8 +174,9 @@ PS：reqbody_limit值要小于nginx中client_body_buffer_size的值才会生效
 
 响应体检测大小上限，默认134217728B(128MB)，若响应体大小超过设置上限，则不检测
 
-###pre_path
-**syntax:** *"pre_path" string*
+pre_path
+--------
+**syntax:** *pre_path string*
 
 **default:** */opt/OpenWAF/*
 
@@ -161,8 +184,9 @@ PS：reqbody_limit值要小于nginx中client_body_buffer_size的值才会生效
 
 OpenWAF的安装路径
 
-###path
-**syntax:** *"path": string*
+path
+----
+**syntax:** *path string*
 
 **default:** *lib/twaf/inc/knowledge_db/twrules*
 
@@ -170,16 +194,19 @@ OpenWAF的安装路径
 
 特征规则库在OpenWAF中的路径
 
-###user_defined_rules
-**syntax:** *"user_defined_rules": table*
+user_defined_rules
+------------------
+**syntax:** *user_defined_rules <array>*
 
-**default:** *none*
+**default:** *[]*
 
 **context:** *twaf_secrules*
 
 策略下的用户自定义特征规则
 
-系统特征规则适用于所有的策略，在引擎启动时通过加载特征库或通过API加载系统特征规则，系统特征规则一般不会动态更改
+先执行用户自定义规则，再执行系统规则
+
+系统特征规则适用于所有的策略，在引擎启动时通过加载特征库或通过 API 加载系统特征规则，系统特征规则一般不会动态更改
 
 用户自定义特征在策略下生效，一般用于变动较大的特征规则，如：时域控制，修改响应头等临时性规则
 
@@ -246,7 +273,8 @@ OpenWAF的安装路径
 ]
 ```
 
-###rules_id
+rules_id
+--------
 **syntax:** *rules_id table*
 
 **default:** *none*
