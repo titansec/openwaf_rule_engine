@@ -473,7 +473,7 @@ Variables
 
 [Back to TOC](#table-of-contents)
 
-##ARGS
+## ARGS
 
 table类型，所有的请求参数，包含ARGS_GET和ARGS_POST
 
@@ -489,7 +489,7 @@ ARGS变量值为{"name": "miracle", "age": "5", "time": "123456", "day": "365"}
 
 [Back to TOC](#table-of-contents)
 
-##ARGS_COMBINED_SIZE
+## ARGS_COMBINED_SIZE
 
 number类型，请求参数总长度，只包含key和value的长度，不包含'&'或'='等符号
 
@@ -503,7 +503,7 @@ ARGS_COMBINED_SIZE变量值为15，而不是18
 
 [Back to TOC](#table-of-contents)
 
-##ARGS_GET
+## ARGS_GET
 
 table类型，querystring参数
 
@@ -517,7 +517,7 @@ ARGS_GET变量值为{"name": "miracle", "age": "5"}
 
 [Back to TOC](#table-of-contents)
 
-##ARGS_GET_NAMES
+## ARGS_GET_NAMES
 
 table类型，querystring参数key值
 
@@ -531,7 +531,7 @@ ARGS_GET_NAMES变量值为["name", "age"]
 
 [Back to TOC](#table-of-contents)
 
-##ARGS_NAMES
+## ARGS_NAMES
 
 table类型，querystring参数key值及post参数key值
 
@@ -547,7 +547,7 @@ ARGS_NAMES变量值为["name", "age", "time", "day"]
 
 [Back to TOC](#table-of-contents)
 
-##ARGS_POST
+## ARGS_POST
 
 table类型，POST参数
 
@@ -565,7 +565,7 @@ ARGS_POST变量值为{"time": "123456", "day": "365"}
 
 [Back to TOC](#table-of-contents)
 
-##ARGS_POST_NAMES
+## ARGS_POST_NAMES
 
 table类型，POST参数key值
 
@@ -583,7 +583,7 @@ ARGS_POST_NAMES变量值为["time", "day"]
 
 [Back to TOC](#table-of-contents)
 
-##BYTES_IN
+## BYTES_IN
 
 number类型，接收信息字节数
 
@@ -591,7 +591,7 @@ number类型，接收信息字节数
 
 [Back to TOC](#table-of-contents)
 
-##CONNECTION_REQUESTS
+## CONNECTION_REQUESTS
 
 number类型，当前连接中的请求数
 
@@ -599,7 +599,7 @@ number类型，当前连接中的请求数
 
 [Back to TOC](#table-of-contents)
 
-##DURATION
+## DURATION
 
 string类型，处理事务用时时间，单位秒(s)
 
@@ -607,7 +607,7 @@ string类型，处理事务用时时间，单位秒(s)
 
 [Back to TOC](#table-of-contents)
 
-##FILES
+## FILES
 
 table类型，从请求体中得到的原始文件名(带有文件后缀名)
 
@@ -615,7 +615,7 @@ table类型，从请求体中得到的原始文件名(带有文件后缀名)
 
 [Back to TOC](#table-of-contents)
 
-##FILES_NAMES
+## FILES_NAMES
 
 table类型，上传文件名称（不带有后缀名）
 
@@ -623,7 +623,7 @@ table类型，上传文件名称（不带有后缀名）
 
 [Back to TOC](#table-of-contents)
 
-##GEO
+## GEO
 
 table类型，包含code3,code,id,continent,name等字段信息
 
@@ -631,7 +631,7 @@ table类型，包含code3,code,id,continent,name等字段信息
 
 [Back to TOC](#table-of-contents)
 
-##GEO_CODE3
+## GEO_CODE3
 
 string类型，3个字母长度的国家缩写
 
@@ -639,7 +639,7 @@ string类型，3个字母长度的国家缩写
 
 [Back to TOC](#table-of-contents)
 
-##GEO_CODE
+## GEO_CODE
 
 string类型，2个字母长度的国家缩写
 
@@ -647,7 +647,7 @@ string类型，2个字母长度的国家缩写
 
 [Back to TOC](#table-of-contents)
 
-##GEO_ID
+## GEO_ID
 
 number类型，国家ID
 
@@ -655,7 +655,7 @@ number类型，国家ID
 
 [Back to TOC](#table-of-contents)
 
-##GEO_CONTINENT
+## GEO_CONTINENT
 
 string类型，国家所在大洲
 
@@ -663,7 +663,7 @@ string类型，国家所在大洲
 
 [Back to TOC](#table-of-contents)
 
-##GEO_NAME
+## GEO_NAME
 
 string类型，国家全称
 
@@ -671,7 +671,7 @@ string类型，国家全称
 
 [Back to TOC](#table-of-contents)
 
-##GZIP_RATIO
+## GZIP_RATIO
 
 string类型，压缩比率
 
@@ -679,7 +679,7 @@ string类型，压缩比率
 
 [Back to TOC](#table-of-contents)
 
-##HTTP_COOKIE
+## HTTP_COOKIE
 
 string类型，请求头中的cookie字段
 
@@ -687,7 +687,7 @@ string类型，请求头中的cookie字段
 
 [Back to TOC](#table-of-contents)
 
-##HTTP_HOST
+## HTTP_HOST
 
 string类型，请求头中的host字段值，既域名:端口(80缺省)
 
@@ -695,7 +695,7 @@ string类型，请求头中的host字段值，既域名:端口(80缺省)
 
 [Back to TOC](#table-of-contents)
 
-##HTTP_REFERER
+## HTTP_REFERER
 
 string类型，请求头中的referer字段
 
@@ -703,7 +703,7 @@ string类型，请求头中的referer字段
 
 [Back to TOC](#table-of-contents)
 
-##HTTP_USER_AGENT
+## HTTP_USER_AGENT
 
 string类型，请求头中的user-agent字段
 
@@ -711,7 +711,7 @@ string类型，请求头中的user-agent字段
 
 [Back to TOC](#table-of-contents)
 
-##IP_VERSION
+## IP_VERSION
 
 string类型，IPv4 or IPv6
 
@@ -719,7 +719,7 @@ string类型，IPv4 or IPv6
 
 [Back to TOC](#table-of-contents)
 
-##MATCHED_VAR
+## MATCHED_VAR
 
 类型不定，当前匹配中的变量
 
@@ -727,7 +727,7 @@ string类型，IPv4 or IPv6
 
 [Back to TOC](#table-of-contents)
 
-##MATCHED_VARS
+## MATCHED_VARS
 
 table类型，单条规则匹配中的所有变量
 
@@ -735,7 +735,7 @@ table类型，单条规则匹配中的所有变量
 
 [Back to TOC](#table-of-contents)
 
-##MATCHED_VAR_NAME
+## MATCHED_VAR_NAME
 
 string类型，当前匹配中的变量名称
 
@@ -743,7 +743,7 @@ string类型，当前匹配中的变量名称
 
 [Back to TOC](#table-of-contents)
 
-##MATCHED_VARS_NAMES
+## MATCHED_VARS_NAMES
 
 table类型，单条规则匹配中的所有变量名称
 
@@ -751,7 +751,7 @@ table类型，单条规则匹配中的所有变量名称
 
 [Back to TOC](#table-of-contents)
 
-##ORIGINAL_DST_ADDR
+## ORIGINAL_DST_ADDR
 
 string类型，服务器地址，应用代理模式为WAF地址，透明模式为后端服务器地址
 
@@ -759,7 +759,7 @@ string类型，服务器地址，应用代理模式为WAF地址，透明模式�
 
 [Back to TOC](#table-of-contents)
 
-##ORIGINAL_DST_PORT
+## ORIGINAL_DST_PORT
 
 string类型，服务器端口号，应用代理模式为WAF端口号，透明模式为后端服务器端口号
 
@@ -767,7 +767,7 @@ string类型，服务器端口号，应用代理模式为WAF端口号，透明�
 
 [Back to TOC](#table-of-contents)
 
-##POLICYID
+## POLICYID
 
 string类型，策略ID
 
@@ -775,7 +775,7 @@ string类型，策略ID
 
 [Back to TOC](#table-of-contents)
 
-##QUERY_STRING
+## QUERY_STRING
 
 string类型，未解码的请求参数
 
@@ -783,7 +783,7 @@ string类型，未解码的请求参数
 
 [Back to TOC](#table-of-contents)
 
-##RAW_HEADER
+## RAW_HEADER
 
 string类型，请求头信息，带请求行
 
@@ -791,7 +791,7 @@ string类型，请求头信息，带请求行
 
 [Back to TOC](#table-of-contents)
 
-##RAW_HEADER_TRUE
+## RAW_HEADER_TRUE
 
 string类型，请求头信息，不带请求行
 
@@ -799,7 +799,7 @@ string类型，请求头信息，不带请求行
 
 [Back to TOC](#table-of-contents)
 
-##REMOTE_ADDR
+## REMOTE_ADDR
 
 string类型，客户端地址
 
@@ -807,7 +807,7 @@ string类型，客户端地址
 
 [Back to TOC](#table-of-contents)
 
-##REMOTE_HOST
+## REMOTE_HOST
 
 string类型，域名
 
@@ -815,7 +815,7 @@ string类型，域名
 
 [Back to TOC](#table-of-contents)
 
-##REMOTE_PORT
+## REMOTE_PORT
 
 number类型，端口号
 
@@ -823,7 +823,7 @@ number类型，端口号
 
 [Back to TOC](#table-of-contents)
 
-##REMOTE_USER
+## REMOTE_USER
 
 string类型，用于身份验证的用户名
 
@@ -831,7 +831,7 @@ string类型，用于身份验证的用户名
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_BASENAME
+## REQUEST_BASENAME
 
 string类型，请求的文件名
 
@@ -845,7 +845,7 @@ REQUEST_BASENAME值为/login.php
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_BODY
+## REQUEST_BODY
 
 类型不定，请求体
 
@@ -853,7 +853,7 @@ REQUEST_BASENAME值为/login.php
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_COOKIES
+## REQUEST_COOKIES
 
 table类型，请求携带的cookie
 
@@ -861,7 +861,7 @@ table类型，请求携带的cookie
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_COOKIES_NAMES
+## REQUEST_COOKIES_NAMES
 
 table类型，请求携带cookie的名称
 
@@ -869,7 +869,7 @@ table类型，请求携带cookie的名称
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_FILENAME
+## REQUEST_FILENAME
 
 string类型，relative request URL(相对请求路径)
 
@@ -883,7 +883,7 @@ REQUEST_FILENAME值为/test/login.php
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_HEADERS
+## REQUEST_HEADERS
 
 table类型，请求头信息
 
@@ -891,7 +891,7 @@ table类型，请求头信息
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_HEADERS_NAMES
+## REQUEST_HEADERS_NAMES
 
 table类型，请求头key值
 
@@ -899,7 +899,7 @@ table类型，请求头key值
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_LINE
+## REQUEST_LINE
 
 string类型，请求行
 
@@ -907,7 +907,7 @@ string类型，请求行
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_METHOD
+## REQUEST_METHOD
 
 string类型，请求方法
 
@@ -915,7 +915,7 @@ string类型，请求方法
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_PROTOCOL
+## REQUEST_PROTOCOL
 
 string类型，http请求协议，如: HTTP/1.1
 
@@ -923,7 +923,7 @@ string类型，http请求协议，如: HTTP/1.1
 
 [Back to TOC](#table-of-contents)
 
-##HTTP_VERSION
+## HTTP_VERSION
 
 string类型，http请求协议版本，如: 1.1
 
@@ -931,7 +931,7 @@ string类型，http请求协议版本，如: 1.1
 
 [Back to TOC](#table-of-contents)
 
-##URI
+## URI
 
 string类型，请求路径，既不带域名，也不带参数
 
@@ -945,7 +945,7 @@ URI变量值为/test/login.php
 
 [Back to TOC](#table-of-contents)
 
-##URL
+## URL
 
 string类型，统一资源定位符，SCHEME与HTTP_HOST与URI的拼接
 
@@ -959,7 +959,7 @@ URL变量值为http://www.baid.com/test/login.php
 
 [Back to TOC](#table-of-contents)
 
-##REQUEST_URI
+## REQUEST_URI
 
 string类型，请求路径，带参数，但不带有域名
 
@@ -973,7 +973,7 @@ REQUEST_URI变量值为/test/login.php?name=miracle
 
 [Back to TOC](#table-of-contents)
 
-##RESPONSE_BODY
+## RESPONSE_BODY
 
 string类型，响应体
 
@@ -981,7 +981,7 @@ string类型，响应体
 
 [Back to TOC](#table-of-contents)
 
-##RESPONSE_HEADERS
+## RESPONSE_HEADERS
 
 table类型，响应头信息
 
@@ -989,7 +989,7 @@ table类型，响应头信息
 
 [Back to TOC](#table-of-contents)
 
-##RESPONSE_STATUS
+## RESPONSE_STATUS
 
 function类型，响应状态码
 
@@ -997,7 +997,7 @@ function类型，响应状态码
 
 [Back to TOC](#table-of-contents)
 
-##SCHEME
+## SCHEME
 
 string类型，http or https
 
@@ -1011,7 +1011,7 @@ SCHEME变量值为http
 
 [Back to TOC](#table-of-contents)
 
-##SERVER_ADDR
+## SERVER_ADDR
 
 string类型，服务器地址
 
@@ -1019,7 +1019,7 @@ string类型，服务器地址
 
 [Back to TOC](#table-of-contents)
 
-##SERVER_NAME
+## SERVER_NAME
 
 string类型，服务器名称
 
@@ -1027,7 +1027,7 @@ string类型，服务器名称
 
 [Back to TOC](#table-of-contents)
 
-##SERVER_PORT
+## SERVER_PORT
 
 number类型，服务器端口号
 
@@ -1035,7 +1035,7 @@ number类型，服务器端口号
 
 [Back to TOC](#table-of-contents)
 
-##SESSION
+## SESSION
 
 table类型，第三方模块lua-resty-session提供的变量
 
@@ -1043,7 +1043,7 @@ table类型，第三方模块lua-resty-session提供的变量
 
 [Back to TOC](#table-of-contents)
 
-##SESSION_DATA
+## SESSION_DATA
 
 table类型，session信息，第三方模块lua-resty-session提供的变量
 
@@ -1051,7 +1051,7 @@ table类型，session信息，第三方模块lua-resty-session提供的变量
 
 [Back to TOC](#table-of-contents)
 
-##TIME
+## TIME
 
 string类型，hour:minute:second
 
@@ -1059,7 +1059,7 @@ string类型，hour:minute:second
 
 [Back to TOC](#table-of-contents)
 
-##TIME_DAY
+## TIME_DAY
 
 number类型，天(1-31)
 
@@ -1067,7 +1067,7 @@ number类型，天(1-31)
 
 [Back to TOC](#table-of-contents)
 
-##TIME_EPOCH
+## TIME_EPOCH
 
 number类型，时间戳，seconds since 1970
 
@@ -1075,7 +1075,7 @@ number类型，时间戳，seconds since 1970
 
 [Back to TOC](#table-of-contents)
 
-##TIME_HOUR
+## TIME_HOUR
 
 number类型，小时(0-23)
 
@@ -1083,7 +1083,7 @@ number类型，小时(0-23)
 
 [Back to TOC](#table-of-contents)
 
-##TIME_MIN
+## TIME_MIN
 
 number类型，分钟(0-59)
 
@@ -1091,7 +1091,7 @@ number类型，分钟(0-59)
 
 [Back to TOC](#table-of-contents)
 
-##TIME_MON
+## TIME_MON
 
 number类型，月份(1-12)
 
@@ -1099,7 +1099,7 @@ number类型，月份(1-12)
 
 [Back to TOC](#table-of-contents)
 
-##TIME_SEC
+## TIME_SEC
 
 number类型，秒(0-59)
 
@@ -1107,7 +1107,7 @@ number类型，秒(0-59)
 
 [Back to TOC](#table-of-contents)
 
-##TIME_WDAY
+## TIME_WDAY
 
 number类型，周(0-6)
 
@@ -1115,7 +1115,7 @@ number类型，周(0-6)
 
 [Back to TOC](#table-of-contents)
 
-##TIME_YEAR
+## TIME_YEAR
 
 number类型，年份，four-digit，例如: 1997
 
@@ -1123,7 +1123,7 @@ number类型，年份，four-digit，例如: 1997
 
 [Back to TOC](#table-of-contents)
 
-##TIME_LOCAL
+## TIME_LOCAL
 
 string类型，当前时间，例如: 26/Aug/2016:01:32:16 -0400
 
@@ -1131,7 +1131,7 @@ string类型，当前时间，例如: 26/Aug/2016:01:32:16 -0400
 
 [Back to TOC](#table-of-contents)
 
-##TX
+## TX
 
 table类型，用于存储当前请求信息的变量，作用域仅仅是当前请求
 
@@ -1139,7 +1139,7 @@ table类型，用于存储当前请求信息的变量，作用域仅仅是当前
 
 [Back to TOC](#table-of-contents)
 
-##UNIQUE_ID
+## UNIQUE_ID
 
 string类型，ID标识，随机生成的字符串，可通过配置来控制随机字符串的长度
 
@@ -1147,7 +1147,7 @@ string类型，ID标识，随机生成的字符串，可通过配置来控制随
 
 [Back to TOC](#table-of-contents)
 
-##UPSTREAM_CACHE_STATUS
+## UPSTREAM_CACHE_STATUS
 
 keeps the status of accessing a response cache (0.8.3). The status can be either “MISS”, “BYPASS”, “EXPIRED”, “STALE”, “UPDATING”, “REVALIDATED”, or “HIT”.
 
@@ -1155,7 +1155,7 @@ keeps the status of accessing a response cache (0.8.3). The status can be either
 
 [Back to TOC](#table-of-contents)
 
-##USERID
+## USERID
 
 string类型，从接入规则配置得到的用于ID标识
 
@@ -1193,7 +1193,7 @@ Transformation Functions
 
 [Back to TOC](#table-of-contents)
 
-##base64_decode
+## base64_decode
 
 Decodes a Base64-encoded string.
 
@@ -1215,7 +1215,7 @@ Note: 注意transform的执行顺序
 
 [Back to TOC](#table-of-contents)
 
-##sql_hex_decode
+## sql_hex_decode
 
 Decode sql hex data.
 
@@ -1223,7 +1223,7 @@ Decode sql hex data.
 
 [Back to TOC](#table-of-contents)
 
-##base64_encode
+## base64_encode
 
 Encodes input string using Base64 encoding.
 
@@ -1231,7 +1231,7 @@ Encodes input string using Base64 encoding.
 
 [Back to TOC](#table-of-contents)
 
-##counter
+## counter
 
 计数，相当于modsecurity中的'&'符号
 
@@ -1239,7 +1239,7 @@ Encodes input string using Base64 encoding.
 
 [Back to TOC](#table-of-contents)
 
-##compress_whitespace
+## compress_whitespace
 
 Converts any of the whitespace characters (0x20, \f, \t, \n, \r, \v, 0xa0) to spaces (ASCII 0x20), compressing multiple consecutive space characters into one.
 
@@ -1247,7 +1247,7 @@ Converts any of the whitespace characters (0x20, \f, \t, \n, \r, \v, 0xa0) to sp
 
 [Back to TOC](#table-of-contents)
 
-##hex_decode
+## hex_decode
 
 Decodes a string that has been encoded using the same algorithm as the one used in hexEncode 
 
@@ -1255,7 +1255,7 @@ Decodes a string that has been encoded using the same algorithm as the one used 
 
 [Back to TOC](#table-of-contents)
 
-##hex_encode
+## hex_encode
 
 Encodes string (possibly containing binary characters) by replacing each input byte with two hexadecimal characters.
 
@@ -1263,7 +1263,7 @@ Encodes string (possibly containing binary characters) by replacing each input b
 
 [Back to TOC](#table-of-contents)
 
-##html_decode
+## html_decode
 
 Decodes the characters encoded as HTML entities.
 
@@ -1271,7 +1271,7 @@ Decodes the characters encoded as HTML entities.
 
 [Back to TOC](#table-of-contents)
 
-##length
+## length
 
 Looks up the length of the input string in bytes
 
@@ -1279,7 +1279,7 @@ Looks up the length of the input string in bytes
 
 [Back to TOC](#table-of-contents)
 
-##lowercase
+## lowercase
 
 Converts all characters to lowercase
 
@@ -1287,7 +1287,7 @@ Converts all characters to lowercase
 
 [Back to TOC](#table-of-contents)
 
-##md5
+## md5
 
 Calculates an MD5 hash from the data in input. The computed hash is in a raw binary form and may need encoded into text to be printed (or logged). Hash functions are commonly used in combination with hex_encode (for example: "transform": ["md5", "hex_encode").
 
@@ -1295,7 +1295,7 @@ Calculates an MD5 hash from the data in input. The computed hash is in a raw bin
 
 [Back to TOC](#table-of-contents)
 
-##normalise_path
+## normalise_path
 
 Removes multiple slashes, directory self-references, and directory back-references (except when at the beginning of the input) from input string.
 
@@ -1303,7 +1303,7 @@ Removes multiple slashes, directory self-references, and directory back-referenc
 
 [Back to TOC](#table-of-contents)
 
-##remove_nulls
+## remove_nulls
 
 Removes all NUL bytes from input
 
@@ -1311,7 +1311,7 @@ Removes all NUL bytes from input
 
 [Back to TOC](#table-of-contents)
 
-##remove_whitespace
+## remove_whitespace
 
 Removes all whitespace characters from input.
 
@@ -1321,7 +1321,7 @@ Removes all whitespace characters from input.
 
 [Back to TOC](#table-of-contents)
 
-##replace_comments
+## replace_comments
 
 用一个空格代替/*...*/注释内容
 
@@ -1329,7 +1329,7 @@ Removes all whitespace characters from input.
 
 [Back to TOC](#table-of-contents)
 
-##remove_comments_char
+## remove_comments_char
 
 Removes common comments chars (/*, */, --, #).
 
@@ -1337,7 +1337,7 @@ Removes common comments chars (/*, */, --, #).
 
 [Back to TOC](#table-of-contents)
 
-##remove_comments
+## remove_comments
 
 去掉/*...*/注释内容
 
@@ -1345,7 +1345,7 @@ Removes common comments chars (/*, */, --, #).
 
 [Back to TOC](#table-of-contents)
 
-##uri_decode
+## uri_decode
 
 Unescape str as an escaped URI component.
 
@@ -1358,7 +1358,7 @@ Unescape str as an escaped URI component.
 
 [Back to TOC](#table-of-contents)
 
-##uri_encode
+## uri_encode
 
 Escape str as a URI component.
 
@@ -1366,7 +1366,7 @@ Escape str as a URI component.
 
 [Back to TOC](#table-of-contents)
 
-##sha1
+## sha1
 
 Calculates a SHA1 hash from the input string. The computed hash is in a raw binary form and may need encoded into text to be printed (or logged). Hash functions are commonly used in combination with hex_encode (for example, "transform": ["sha1", "hex_encode"]).
 
@@ -1374,7 +1374,7 @@ Calculates a SHA1 hash from the input string. The computed hash is in a raw bina
 
 [Back to TOC](#table-of-contents)
 
-##trim_left
+## trim_left
 
 Removes whitespace from the left side of the input string.
 
@@ -1382,7 +1382,7 @@ Removes whitespace from the left side of the input string.
 
 [Back to TOC](#table-of-contents)
 
-##trim_right
+## trim_right
 
 Removes whitespace from the right side of the input string.
 
@@ -1390,7 +1390,7 @@ Removes whitespace from the right side of the input string.
 
 [Back to TOC](#table-of-contents)
 
-##trim
+## trim
 
 Removes whitespace from both the left and right sides of the input string.
 
@@ -1424,7 +1424,7 @@ Operators
 
 [Back to TOC](#table-of-contents)
 
-##begins_with
+## begins_with
 
 Returns true if the parameter string is found at the beginning of the input.
 
@@ -1432,7 +1432,7 @@ Returns true if the parameter string is found at the beginning of the input.
 
 [Back to TOC](#table-of-contents)
 
-##contains
+## contains
 
 Returns true if the parameter string is found anywhere in the input.
 
@@ -1455,7 +1455,7 @@ PS: modsecurity的pm忽略大小写，OpenWAF中contains不忽略大小写
 
 [Back to TOC](#table-of-contents)
 
-##contains_word
+## contains_word
 
 Returns true if the parameter string (with word boundaries) is found anywhere in the input.
 
@@ -1463,7 +1463,7 @@ Returns true if the parameter string (with word boundaries) is found anywhere in
 
 [Back to TOC](#table-of-contents)
 
-##detect_sqli
+## detect_sqli
 
 This operator uses LibInjection to detect SQLi attacks.
 
@@ -1471,7 +1471,7 @@ This operator uses LibInjection to detect SQLi attacks.
 
 [Back to TOC](#table-of-contents)
 
-##detect_xss
+## detect_xss
 
 This operator uses LibInjection to detect XSS attacks.
 
@@ -1479,7 +1479,7 @@ This operator uses LibInjection to detect XSS attacks.
 
 [Back to TOC](#table-of-contents)
 
-##ends_with
+## ends_with
 
 Returns true if the parameter string is found at the end of the input.
 
@@ -1487,7 +1487,7 @@ Returns true if the parameter string is found at the end of the input.
 
 [Back to TOC](#table-of-contents)
 
-##equal
+## equal
 
 Performs a string comparison and returns true if the parameter string is identical to the input string.
 
@@ -1508,7 +1508,7 @@ Performs a string comparison and returns true if the parameter string is identic
 
 [Back to TOC](#table-of-contents)
 
-##greater_eq
+## greater_eq
 
 Performs numerical comparison and returns true if the input value is greater than or equal to the provided parameter.
 
@@ -1518,7 +1518,7 @@ return false, if a value is provided that cannot be converted to a number.
 
 [Back to TOC](#table-of-contents)
 
-##greater
+## greater
 
 Performs numerical comparison and returns true if the input value is greater than the operator parameter.
 
@@ -1528,7 +1528,7 @@ return false, if a value is provided that cannot be converted to a number.
 
 [Back to TOC](#table-of-contents)
 
-##ip_utils
+## ip_utils
 
 Performs a fast ipv4 or ipv6 match of REMOTE_ADDR variable data. Can handle the following formats:
 
@@ -1558,7 +1558,7 @@ ip_utils与pf的组合相当于modsecurity中的ipMatchF和ipMatchFromFile
 
 [Back to TOC](#table-of-contents)
 
-##less_eq
+## less_eq
 
 Performs numerical comparison and returns true if the input value is less than or equal to the operator parameter.
 
@@ -1568,7 +1568,7 @@ return false, if a value is provided that cannot be converted to a number.
 
 [Back to TOC](#table-of-contents)
 
-##less
+## less
 
 Performs numerical comparison and returns true if the input value is less than to the operator parameter.
 
@@ -1578,7 +1578,7 @@ return false, if a value is provided that cannot be converted to a number.
 
 [Back to TOC](#table-of-contents)
 
-##pf
+## pf
 
 pattern是operator操作的参数
 
@@ -1592,7 +1592,7 @@ pf与ip_utils组合，相当于modsecurity的ipMatchF或ipMatchFromFile
 
 [Back to TOC](#table-of-contents)
 
-##regex
+## regex
 
 Performs a regular expression match of the pattern provided as parameter. 
 
@@ -1657,7 +1657,7 @@ OpenWAF中无capture指令，但使用regex默认开启capture功能
 
 [Back to TOC](#table-of-contents)
 
-##str_match
+## str_match
 
 等同于contains
 
@@ -1665,7 +1665,7 @@ OpenWAF中无capture指令，但使用regex默认开启capture功能
 
 [Back to TOC](#table-of-contents)
 
-##validate_url_encoding
+## validate_url_encoding
 
 Validates the URL-encoded characters in the provided input string.
 
@@ -1673,7 +1673,7 @@ Validates the URL-encoded characters in the provided input string.
 
 [Back to TOC](#table-of-contents)
 
-##num_range
+## num_range
 
 判断是否在数字范围内
 
@@ -1694,7 +1694,7 @@ Validates the URL-encoded characters in the provided input string.
 
 [Back to TOC](#table-of-contents)
 
-##str_range
+## str_range
 
 判断是否在字符串范围内
 
@@ -1742,7 +1742,7 @@ Others
 
 [Back to TOC](#table-of-contents)
 
-##allow
+## allow
 
 Stops rule processing of the current phase on a successful match and allows the transaction to proceed.
 
@@ -1754,7 +1754,7 @@ Stops rule processing of the current phase on a successful match and allows the 
 
 [Back to TOC](#table-of-contents)
 
-##deny
+## deny
 
 Stops rule processing and intercepts transaction.
 
@@ -1767,7 +1767,7 @@ Stops rule processing and intercepts transaction.
 
 [Back to TOC](#table-of-contents)
 
-##id
+## id
 
 Stops rule processing and intercepts transaction.
 
@@ -1779,7 +1779,7 @@ Stops rule processing and intercepts transaction.
 
 [Back to TOC](#table-of-contents)
 
-##nolog
+## nolog
 
 不记录日志
 
@@ -1793,7 +1793,7 @@ Stops rule processing and intercepts transaction.
 
 [Back to TOC](#table-of-contents)
 
-##op_negated
+## op_negated
 
 对operator结果的取反
 
@@ -1826,7 +1826,7 @@ Stops rule processing and intercepts transaction.
 
 [Back to TOC](#table-of-contents)
 
-##parse
+## parse
 
 对变量进一步解析
 
@@ -1923,7 +1923,7 @@ Stops rule processing and intercepts transaction.
 
 [Back to TOC](#table-of-contents)
 
-##pass
+## pass
 
 Continues processing with the next rule in spite of a successful match.
 
@@ -1935,7 +1935,7 @@ Continues processing with the next rule in spite of a successful match.
 
 [Back to TOC](#table-of-contents)
 
-##phase
+## phase
 
 规则执行的阶段，取值可为"access","header_filter","body_filter"的组合
 
@@ -1959,7 +1959,7 @@ Continues processing with the next rule in spite of a successful match.
 
 [Back to TOC](#table-of-contents)
 
-##proxy_cache
+## proxy_cache
 
 ```
 {
@@ -2034,7 +2034,7 @@ PS: proxy_cache_content_type指令为官方指令，是miracle Qi修改Nginx源�
 
 [Back to TOC](#table-of-contents)
 
-##redirect
+## redirect
 
 ```
 "action": "redirect",
@@ -2045,7 +2045,7 @@ PS: proxy_cache_content_type指令为官方指令，是miracle Qi修改Nginx源�
 
 [Back to TOC](#table-of-contents)
 
-##charactor_version
+## charactor_version
 
 指定此条规则的版本，同modsecurity中Action的rev功能
 
@@ -2057,7 +2057,7 @@ PS: proxy_cache_content_type指令为官方指令，是miracle Qi修改Nginx源�
 
 [Back to TOC](#table-of-contents)
 
-##severity
+## severity
 
 Assigns severity to the rule in which it is used.
 
@@ -2082,7 +2082,7 @@ DEBUG
 
 [Back to TOC](#table-of-contents)
 
-##setvar
+## setvar
 
 Creates, removes, or updates a variable. 
 
@@ -2122,7 +2122,7 @@ Creates, removes, or updates a variable.
 
 [Back to TOC](#table-of-contents)
 
-##meta
+## meta
 
 "action"的附属信息
 
@@ -2140,7 +2140,7 @@ Creates, removes, or updates a variable.
 
 [Back to TOC](#table-of-contents)
 
-##transform
+## transform
 
 This action is used to specify the transformation pipeline to use to transform the value of each variable used in the rule before matching.
 
@@ -2148,7 +2148,7 @@ This action is used to specify the transformation pipeline to use to transform t
 
 [Back to TOC](#table-of-contents)
 
-##tag
+## tag
 
 Assigns a tag (category) to a rule.
 
@@ -2161,7 +2161,7 @@ Assigns a tag (category) to a rule.
 
 [Back to TOC](#table-of-contents)
 
-##release_version
+## release_version
 
 规则集版本，等同于modsecurity中Action的ver功能
 
@@ -2173,7 +2173,7 @@ Assigns a tag (category) to a rule.
 
 [Back to TOC](#table-of-contents)
 
-##robot
+## robot
 
 人机识别
 
@@ -2187,7 +2187,7 @@ Assigns a tag (category) to a rule.
 
 [Back to TOC](#table-of-contents)
 
-##add_resp_headers
+## add_resp_headers
 
 增删改响应头
 
